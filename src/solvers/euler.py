@@ -4,24 +4,22 @@ import matplotlib.pyplot as plt
 # Method: solve (Solves a system of ODEs using Euler's method)
     # Arguments:
         # t0: List. List of function values for t=0
-        # h: Float. Step size
-        # t_end: Int. t-value where the computation should end
+        # t_values: A list of all time values for which the function should be evaluated.
         # func: List. List of functions. Takes input (t, [ARRAY OF FUNCTION VALUES AT t])
-    # Returns: array of time points, array of array of values
-def solve(t0, h, t_end, func):
-    t_curr = 0 # Current y
-    t_points = [t_curr] # List of all time points
-
-    values = [] # List of lists of all values
+    # Returns: list of lists of values
+def solve(t0, t_values, func,):
+    values = [] # List of lists of all values, 2d list
     [values.append([val]) for val in t0] # Add all t0 values to values list
 
-    while t_curr < t_end:
-        for idx, f in enumerate(func):
-            curr_slope = f(t_curr, [var[-1] for var in values]) # Calculate slope for the current function
-            values[idx].append(values[idx][-1] + h * curr_slope) # Calculate and append the new value
+    for t_idx, t in enumerate(t_values):
+        if (t_idx == 0): continue # Effects of bad code
 
-        # Increase time
-        t_curr = t_curr + h
-        t_points.append(t_curr)
+        for idx, f in enumerate(func): # Loop through all functions and calculate their slope
+            curr_slope = f(t, [var[-1] for var in values]) # Calculate slope for the current function
+            step_size = (t - t_values[t_idx - 1]) # Difference between prev and current time point
 
-    return t_points, values
+            new_value = values[idx][-1] + step_size * curr_slope # Calculate the new value
+
+            values[idx].append(new_value) # Append new value to list
+
+    return values
