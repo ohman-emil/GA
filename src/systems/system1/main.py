@@ -1,15 +1,23 @@
 # Hack for importing files in solvers directory. This is not exemplary, but there are better things to focus on.
 import sys
 sys.path.append('./src/solvers')
-import numpy as np
 
-import euler
+import euler, heun
 import matplotlib.pyplot as plt
-from numpy import sin, cos, array, trapz
+from numpy import sin, cos, array, trapz, arange
 
 step = 0.01
 t_max = 15
-time_points = np.arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
+time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
+
+# values = heun.solve(
+#     [2, 0], # Values at t0
+#     time_points,
+#     [ # Functions
+#         lambda t, data: 2*data[0] + 8*data[1],
+#         lambda t, data: -1*data[0] - 2*data[1]
+#     ]
+# )
 
 values = euler.solve(
     [2, 0], # Values at t0
@@ -34,6 +42,6 @@ plt.fill_between(time_points, diff, color='green', alpha=0.25) # Fill space betw
 total_error = trapz(diff, x=time_points) # Integrate the difference to calculate total error
 relative_error = total_error / t_max # Divide by t_max to caluculate relative error
 
-print(relative_error)
+print(total_error, relative_error)
 
 plt.show()
