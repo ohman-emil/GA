@@ -1,8 +1,8 @@
-# Hack for importing files in solvers directory. This is not exemplary, but there are better things to focus on.
+# Hack for importing files in directory. This is not exemplary, but there are better things to focus on.
 import sys
-sys.path.append('./src/solvers')
+sys.path.append('./src')
 
-import euler, heun
+import solvers
 import matplotlib.pyplot as plt
 from numpy import sin, cos, array, trapz, arange
 
@@ -10,7 +10,7 @@ step = 0.01
 t_max = 15
 time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
 
-# values = heun.solve(
+# values = solvers.heun(
 #     [2, 0], # Values at t0
 #     time_points,
 #     [ # Functions
@@ -19,7 +19,7 @@ time_points = arange(0, t_max, step) # Create a list of all time values for whic
 #     ]
 # )
 
-values = euler.solve(
+values = solvers.euler(
     [2, 0], # Values at t0
     time_points,
     [ # Functions
