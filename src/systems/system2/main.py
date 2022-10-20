@@ -4,10 +4,11 @@ sys.path.append('./src')
 
 import solvers
 import matplotlib.pyplot as plt
-from numpy import sin, cos, array, trapz, arange
+from numpy import sin, cos, array, trapz, arange, exp
+import math
 
 step = 0.01
-t_max = 15
+t_max = 5
 time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
 
 # values = solvers.heun(
@@ -23,16 +24,16 @@ values = solvers.euler(
     [2, 0], # Values at t0
     time_points,
     [ # Functions
-        lambda t, data: 2*data[0] + 8*data[1],
-        lambda t, data: -1*data[0] - 2*data[1]
+        lambda t, data: 1*data[0] + 2*data[1],
+        lambda t, data: -0.5*data[0] + 1*data[1]
     ]
 )
 
 fig, axes = plt.subplots(nrows=2, ncols=1)
 
 analytic_sols = [
-    2 * cos(2 * time_points) + 2 * sin(2 * time_points),
-    -1 * sin(2 * time_points)
+    2*(exp(time_points))*cos(time_points),
+    -1*(exp(time_points))*sin(time_points)
 ]
 
 for idx, sol in enumerate(values):
