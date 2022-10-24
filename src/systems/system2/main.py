@@ -11,15 +11,6 @@ step = 0.01
 t_max = 5
 time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
 
-# values = solvers.heun(
-#     [2, 0], # Values at t0
-#     time_points,
-#     [ # Functions
-#         lambda t, data: 2*data[0] + 8*data[1],
-#         lambda t, data: -1*data[0] - 2*data[1]
-#     ]
-# )
-
 values = solvers.euler(
     [2, 0], # Values at t0
     time_points,
