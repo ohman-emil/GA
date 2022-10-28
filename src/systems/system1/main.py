@@ -3,45 +3,45 @@ import sys
 sys.path.append('./src')
 
 import solvers
+import methods
 import matplotlib.pyplot as plt
 from numpy import sin, cos, array, trapz, arange, concatenate
+import csv
 
 step = 0.01
 t_max = 100
+t0 = [] # Values at t0 ADD VALUES
 time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
 
-values = []
+funcs = [ # Functions
+    lambda t, data: # ADD FUNCTION
+    lambda t, data: # ADD FUNCTION
+]
 
+analytic_sols = [
+    
+]
+
+values = []
 values.extend( # Add solution of Euler's method into list
     solvers.euler(
-        [2, 0], # Values at t0
+        t0,
         time_points,
-        [ # Functions
-            lambda t, data: 2*data[0] + 8*data[1],
-            lambda t, data: -1*data[0] - 2*data[1]
-        ]
+        funcs
     )
 )
-
 values.extend( # Add solution of Heun's method into list
     solvers.heun(
-        [2, 0], # Values at t0
+        t0,
         time_points,
-        [ # Functions
-            lambda t, data: 2*data[0] + 8*data[1],
-            lambda t, data: -1*data[0] - 2*data[1]
-        ]
+        funcs
     )
 )
 
 fig, axes = plt.subplots(nrows=(len(values)), ncols=1)
 
-analytic_sols = [
-    2 * cos(2 * time_points) + 2 * sin(2 * time_points),
-    -1 * sin(2 * time_points)
-]
-
 error = []
+
 for idx, sol in enumerate(values):
     axes[idx].plot(time_points, sol, color='hotpink') # Plot numeric solution
 
@@ -56,11 +56,20 @@ for idx, sol in enumerate(values):
     axes[idx].plot(time_points, diff, color='green') # Plot difference
     axes[idx].fill_between(time_points, diff, color='green', alpha=0.25) # Fill space betwen x-axis and the difference
 
-    calculated_error = trapz(diff, x=time_points)/function_range
-    error.append(calculated_error)
+    E_1 = trapz(diff, x=time_points) # Calculate E_1 using numerical integration
+    E_2 = E_1/function_range
+    E_3 = E_1/t_max
+    E_4 = E_1/(function_range*t_max)
+    error.append([E_1, E_2, E_3, E_4]) # Append a list of all 4 errors
 
-    # WRITE A FILE IN /SRC/-DIRECTORY WHICH HANDLES ERROR QUANTIFICATIONS?
 
-print(error)
+with open('data.csv', 'w') as doc:
+    writer = csv.writer(doc) # Create a writer instance
+    writer.writerows(methods.generateCSVData(time_points, values)) # Write csv data with time points and values
+
+with open('errors.csv', 'w') as doc:
+    writer = csv.writer(doc) # Create a writer instance
+    ids = arange(0, len(error)) # Numpy list of integers from 0. Equal to the amount of functions
+    writer.writerows(methods.generateCSVData(ids, error)) # Write csv data with ids and error data
 
 plt.show()
