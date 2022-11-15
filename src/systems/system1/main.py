@@ -2,24 +2,34 @@
 import sys
 sys.path.append('./src')
 
-import solvers
-import methods
-import matplotlib.pyplot as plt
-from numpy import sin, cos, array, trapz, arange, concatenate
 import csv
+from math import pi, sqrt
+
+import matplotlib.pyplot as plt
+from numpy import arange, cos, sin, trapz
+
+import methods
+import solvers
 
 step = 0.01
-t_max = 100
-t0 = [] # Values at t0 ADD VALUES
+t_max = 20
+t0 = [1, 1] # Values at t0
 time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
 
 funcs = [ # Functions
-    lambda t, data: # ADD FUNCTION
-    lambda t, data: # ADD FUNCTION
+    lambda t, data: 5.4*data[0] + -3.4*data[1],
+    lambda t, data: 9.2*data[0] + -5.4*data[1]
 ]
 
-analytic_sols = [
-    
+a = 1
+b = -19/sqrt(53)
+
+analytic_sols = [ # Analytic solutions
+    1/46*(
+        a*(27*cos(-sqrt(53)*time_points/5)+sqrt(53)*sin(-sqrt(53)*time_points/5))+
+        b*(-sqrt(53)*cos(-sqrt(53)*time_points/5)+27*sin(-sqrt(53)*time_points/5))
+    ),
+    a*cos(-sqrt(53)*time_points/5)+b*sin(-sqrt(53)*time_points/5)
 ]
 
 values = []
@@ -56,12 +66,7 @@ for idx, sol in enumerate(values):
     axes[idx].plot(time_points, diff, color='green') # Plot difference
     axes[idx].fill_between(time_points, diff, color='green', alpha=0.25) # Fill space betwen x-axis and the difference
 
-    E_1 = trapz(diff, x=time_points) # Calculate E_1 using numerical integration
-    E_2 = E_1/function_range
-    E_3 = E_1/t_max
-    E_4 = E_1/(function_range*t_max)
-    error.append([E_1, E_2, E_3, E_4]) # Append a list of all 4 errors
-
+    error.append(trapz(diff, x=time_points)/function_range)
 
 with open('data.csv', 'w') as doc:
     writer = csv.writer(doc) # Create a writer instance
@@ -70,6 +75,6 @@ with open('data.csv', 'w') as doc:
 with open('errors.csv', 'w') as doc:
     writer = csv.writer(doc) # Create a writer instance
     ids = arange(0, len(error)) # Numpy list of integers from 0. Equal to the amount of functions
-    writer.writerows(methods.generateCSVData(ids, error)) # Write csv data with ids and error data
+    writer.writerow(error) # Write csv data
 
 plt.show()

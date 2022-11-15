@@ -1,8 +1,10 @@
-# Method: generateCSVData (Manipulates data to work in a csv file)
-    # Arguments:
-        # time_points: A 1d numpy array of time-points. First column
-        # values: A 2d list of all function values. One list per column
-    # Returns: A csv file for writing to
+"""
+Method: generateCSVData (Manipulates data to work in a csv file)
+    Arguments:
+        time_points: A 1d numpy array of time-points. First column
+        values: A 2d list of all function values. One list per column
+    Returns: A csv file for writing to
+"""
 def generateCSVData(time_points, values):
     time_points = time_points.tolist() # Convert to python list
 

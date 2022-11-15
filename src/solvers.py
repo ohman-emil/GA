@@ -1,9 +1,11 @@
-# Method: euler (Solves a system of ODEs using Euler's method)
-    # Arguments:
-        # t0: List. List of function values for t=0
-        # t_values: A list of all time values for which the function should be evaluated.
-        # func: List. List of functions. Takes input (t, [ARRAY OF FUNCTION VALUES AT t])
-    # Returns: list of lists of values
+"""
+Method: euler (Solves a system of ODEs using Euler's method)
+    Arguments:
+        t0: List. List of function values for t=0
+        t_values: A list of all time values for which the function should be evaluated.
+        func: List. List of functions. Takes input (t, [ARRAY OF FUNCTION VALUES AT t])
+    Returns: list of lists of values
+"""
 def euler(t0, t_values, func):
     values = [] # List of lists of all values, 2d list
     [values.append([val]) for val in t0] # Add all t0 values to values list
@@ -23,12 +25,14 @@ def euler(t0, t_values, func):
 
     return values
 
-# Method: heun (Solves a system of ODEs using Heuns's method)
-    # Arguments:
-        # t0: List. List of function values for t=0
-        # t_values: A list of all time values for which the function should be evaluated.
-        # func: List. List of functions. Takes input (t, [ARRAY OF FUNCTION VALUES AT t])
-    # Returns: list of lists of values
+"""
+Method: heun (Solves a system of ODEs using Heuns's method)
+    Arguments:
+        t0: List. List of function values for t=0
+        t_values: A list of all time values for which the function should be evaluated.
+        func: List. List of functions. Takes input (t, [ARRAY OF FUNCTION VALUES AT t])
+    Returns: list of lists of values
+"""
 def heun(t0, t_values, func):
     values = [] # List of lists of all values, 2d list
     [values.append([val]) for val in t0] # Add all t0 values to values list
