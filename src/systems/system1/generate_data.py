@@ -68,7 +68,7 @@ for step in step_lengths:
 
     with open(f'step_{step}.csv', 'w') as doc:
         writer = csv.writer(doc) # Create a writer instance
-        writer.writerow(['euler1', 'euler2', 'heun1', 'heun2'])
+        writer.writerow(['t', 'euler1', 'euler2', 'heun1', 'heun2'])
         writer.writerows(methods.generateCSVData(time_points, temp_values)) # Write csv data with time points and values
 
 print(error)
