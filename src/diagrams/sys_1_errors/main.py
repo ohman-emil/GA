@@ -2,8 +2,11 @@ import matplotlib.pyplot as plt
 from matplotlib import ticker, font_manager
 from numpy import geomspace
 import csv
+import os
 
-font_path = '/Users/emil.ohman/Library/Fonts/cmunrm.ttf' # Font path
+# SET FONT_PATH ENV VAR POINTING TO A TTF FILE
+
+font_path = os.getenv('FONT_PATH') # Font path
 font_manager.fontManager.addfont(font_path) # Add font to matplotlib lib
 prop = font_manager.FontProperties(fname=font_path) # Get its properties
 
