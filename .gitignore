@@ -1,4 +1,6 @@
-.*
+._*
+.vscode
+.DS_Store
 *.log
 env
 src/legacy
