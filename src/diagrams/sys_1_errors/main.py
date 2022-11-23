@@ -39,7 +39,8 @@ ax.set_xscale('log') # Make x-axis log scale
 ax.set_xlabel('Steglängd', fontsize='x-large')
 ax.set_ylabel('Avvikelse', fontsize='x-large')
 ax.get_xaxis().set_major_formatter(ticker.ScalarFormatter()) # Add ticks to x-axis
-ax.set_xticks(geomspace(max(plot_data[0]), min(plot_data[0]), 5)) # Add 5 equally spaces ticks to x-axis
+ax.set_xticks(geomspace(max(plot_data[0]), min(plot_data[0]), 10)) # Add equally spaces ticks to x-axis
+ax.set_xticks([], minor=True) # Remove the minor ticks
 ax.legend(loc='upper left', fontsize='x-large', frameon=True) # Add legend
 plt.grid() # Add grid lines
 
