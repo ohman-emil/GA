@@ -64,5 +64,5 @@ for idx, sol in enumerate(values):
     axes[idx].fill_between(time_points, diff, color='green', alpha=0.25) # Fill space betwen x-axis and the difference
 
 
-plt.savefig(f'diagram_step_{str(step).replace(".", "-")}.svg')
+plt.savefig(f'sys_1_step_{str(step).replace(".", "-")}.svg')
 plt.show()

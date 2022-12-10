@@ -11,7 +11,7 @@ font_manager.fontManager.addfont(font_path) # Add font to matplotlib lib
 prop = font_manager.FontProperties(fname=font_path) # Get its properties
 
 data = []
-with open('src/systems/system1/errors.csv', 'r') as file: # Open data file
+with open('src/system1/data/errors.csv', 'r') as file: # Open data file
     reader = csv.reader(file)
     [data.append(row) for row in reader] # Add each row to the data list
 

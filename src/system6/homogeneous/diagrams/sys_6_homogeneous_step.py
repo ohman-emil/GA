@@ -16,12 +16,12 @@ t0 = [1, 1] # Values at t0
 time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
 
 funcs = [ # Functions
-    lambda t, data: 7.2*data[0] + 9.8*data[1] - 1.4,
-    lambda t, data: -5.5*data[0] + -7.2*data[1] + 4.1
+    lambda t, data: 7.2*data[0] + 9.8*data[1],
+    lambda t, data: -5.5*data[0] + -7.2*data[1]
 ]
 
-a = 1194/103
-b = -43*sqrt(2/103)
+a = 1
+b = -127/sqrt(206)
 
 analytic_sols = [ # Analytic solutions
     a*(
@@ -31,8 +31,8 @@ analytic_sols = [ # Analytic solutions
     b*(
         ((-sqrt(206)/55)*cos(0.2*sqrt(103/2)*time_points)+
         (-72/55)*sin(0.2*sqrt(103/2)*time_points))
-    )+(1505/103),
-    a*cos(0.2*sqrt(103/2)*time_points)+b*sin(0.2*sqrt(103/2)*time_points)+(-1091/103)
+    ),
+    a*cos(0.2*sqrt(103/2)*time_points)+b*sin(0.2*sqrt(103/2)*time_points)
 ]
 
 values = []
@@ -70,5 +70,5 @@ for idx, sol in enumerate(values):
     axes[idx].fill_between(time_points, diff, color='green', alpha=0.25) # Fill space betwen x-axis and the difference
 
 
-plt.savefig(f'diagram_step_{str(step).replace(".", "-")}.svg')
+plt.savefig(f'sys_6_step_{str(step).replace(".", "-")}.svg')
 plt.show()

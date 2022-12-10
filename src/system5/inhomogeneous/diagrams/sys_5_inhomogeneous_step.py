@@ -16,23 +16,23 @@ t0 = [1, 1] # Values at t0
 time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
 
 funcs = [ # Functions
-    lambda t, data: 7.2*data[0] + 9.8*data[1],
-    lambda t, data: -5.5*data[0] + -7.2*data[1]
+    lambda t, data: 2.3*data[0] + 5.0*data[1] - 2.5,
+    lambda t, data: -5.8*data[0] + -2.3*data[1] + 6.5
 ]
 
-a = 1
-b = -127/sqrt(206)
+a = 2416/2371
+b = -16/sqrt(2371)
 
 analytic_sols = [ # Analytic solutions
     a*(
-        ((-72/55)*cos(0.2*sqrt(103/2)*time_points))-
-        ((-sqrt(206)/55)*sin(0.2*sqrt(103/2)*time_points))
+        ((-23/58)*cos(sqrt(2371)/10*time_points))-
+        ((-sqrt(2371)/58)*sin(sqrt(2371)/10*time_points))
     )+
     b*(
-        ((-sqrt(206)/55)*cos(0.2*sqrt(103/2)*time_points)+
-        (-72/55)*sin(0.2*sqrt(103/2)*time_points))
-    ),
-    a*cos(0.2*sqrt(103/2)*time_points)+b*sin(0.2*sqrt(103/2)*time_points)
+        ((-sqrt(2371)/58)*cos(sqrt(2371)/10*time_points)+
+        (-23/58)*sin(sqrt(2371)/10*time_points))
+    )+(2675/2371),
+    a*cos(sqrt(2371)/10*time_points)+b*sin(sqrt(2371)/10*time_points)+(-45/2371)
 ]
 
 values = []
@@ -70,5 +70,5 @@ for idx, sol in enumerate(values):
     axes[idx].fill_between(time_points, diff, color='green', alpha=0.25) # Fill space betwen x-axis and the difference
 
 
-plt.savefig(f'diagram_step_{str(step).replace(".", "-")}.svg')
+plt.savefig(f'sys_5_inhomogeneous_step_{str(step).replace(".", "-")}.svg')
 plt.show()

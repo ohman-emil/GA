@@ -21,7 +21,7 @@ funcs = [ # Functions
 ]
 
 a = 1
-b = -16/sqrt(2371)
+b = -81/sqrt(2371)
 
 values = []
 error = []

@@ -11,7 +11,7 @@ font_manager.fontManager.addfont(font_path) # Add font to matplotlib lib
 prop = font_manager.FontProperties(fname=font_path) # Get its properties
 
 data = []
-with open('src/system5/homogeneous/data/errors.csv', 'r') as file: # Open data file
+with open('src/system5/inhomogeneous/data/errors.csv', 'r') as file: # Open data file
     reader = csv.reader(file)
     [data.append(row) for row in reader] # Add each row to the data list
 
@@ -44,5 +44,5 @@ ax.set_xticks([], minor=True) # Remove the minor ticks
 ax.legend(loc='upper left', fontsize='x-large', frameon=True) # Add legend
 plt.grid() # Add grid lines
 
-plt.savefig('sys_5_homogeneous_errors.svg', bbox_inches='tight') # Save figure
+plt.savefig('sys_5_inhomogeneous_errors.svg', bbox_inches='tight') # Save figure
 plt.show() # And show it!
