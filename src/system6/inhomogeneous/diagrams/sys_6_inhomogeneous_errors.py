@@ -44,5 +44,5 @@ ax.set_xticks([], minor=True) # Remove the minor ticks
 ax.legend(loc='upper left', fontsize='x-large', frameon=True) # Add legend
 plt.grid() # Add grid lines
 
-plt.savefig('sys_6_homogeneous_errors.svg', bbox_inches='tight') # Save figure
+plt.savefig('sys_6_inhomogeneous_errors.svg', bbox_inches='tight') # Save figure
 plt.show() # And show it!
