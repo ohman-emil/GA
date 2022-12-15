@@ -1,14 +1,21 @@
-# Hack for importing files in directory. This is not exemplary, but there are better things to focus on.
 import sys
-sys.path.append('./src')
+
+# Hack for importing files in directory. This is not exemplary, but there are better things to focus on.
+try:
+    sys.path.append('./src')
+    import methods
+    import solvers
+except ModuleNotFoundError:
+    sys.path.append('../..')
+    import methods
+    import solvers
+except Exception as e:
+    print(f'Module import error: {e}')
 
 import csv
 from math import sqrt
 
 from numpy import arange, cos, sin, trapz
-
-import methods
-import solvers
 
 step_lengths = [0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625, 0.0078125, 0.00390625, 0.001953125]
 
@@ -70,8 +77,6 @@ for step in step_lengths:
         writer = csv.writer(doc) # Create a writer instance
         writer.writerow(['t', 'euler1', 'euler2', 'heun1', 'heun2'])
         writer.writerows(methods.generateCSVData(time_points, temp_values)) # Write csv data with time points and values
-
-print(error)
 
 with open('errors.csv', 'w') as doc:
     writer = csv.writer(doc) # Create a writer instance
