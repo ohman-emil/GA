@@ -50,7 +50,7 @@ for option in axis_options.items():
 
     else: axis_options_string += f'{option[0]}={option[1]},'
 
-file_contents = ""
+file_contents = "% Automatically generated code. github.com/ohman-emil/GA\n"
 file_contents += f'\\begin{{tikzpicture}}\n' # Begin TikZ environment
 
 # Add color definitions
