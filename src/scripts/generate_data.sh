@@ -24,34 +24,34 @@ python3 generate_data.py
 cd ../..
 echo "System 4 Done"
 
-cd system5/homogeneous/data
+cd system5_homogeneous/data
 python3 generate_data.py
-cd ../../..
+cd ../..
 echo "System 5 Homogeneous Done"
 
-cd system5/inhomogeneous/data
+cd system5_inhomogeneous/data
 python3 generate_data.py
-cd ../../..
+cd ../..
 echo "System 5 Inhomogeneous Done"
 
-cd system6/homogeneous/data
+cd system6_homogeneous/data
 python3 generate_data.py
-cd ../../..
+cd ../..
 echo "System 6 Homogeneous Done"
 
-cd system6/inhomogeneous/data
+cd system6_inhomogeneous/data
 python3 generate_data.py
-cd ../../..
+cd ../..
 echo "System 6 Inhomogeneous Done"
 
-cd system7/homogeneous/data
+cd system7_homogeneous/data
 python3 generate_data.py
-cd ../../..
+cd ../..
 echo "System 7 Homogeneous Done"
 
-cd system7/inhomogeneous/data
+cd system7_inhomogeneous/data
 python3 generate_data.py
-cd ../../..
+cd ../..
 echo "System 7 Inhomogeneous Done"
 
 echo "All Systems Done"

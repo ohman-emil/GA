@@ -6,7 +6,7 @@ try:
     import methods
     import solvers
 except ModuleNotFoundError:
-    sys.path.append('../../..')
+    sys.path.append('../..')
     import methods
     import solvers
 except Exception as e:
