@@ -32,4 +32,10 @@ echo "System 7 Homogeneous Done"
 python3 src/export_tikz_picture_errors.py 7_inhomogeneous
 echo "System 7 Inhomogeneous Done"
 
+python3 src/export_tikz_picture_errors.py 8_homogeneous
+echo "System 8 Homogeneous Done"
+
+python3 src/export_tikz_picture_errors.py 8_inhomogeneous
+echo "System 8 Inhomogeneous Done"
+
 echo "All Systems Done"

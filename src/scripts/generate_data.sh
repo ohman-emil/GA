@@ -54,4 +54,14 @@ python3 generate_data.py
 cd ../..
 echo "System 7 Inhomogeneous Done"
 
+cd system8_homogeneous/data
+python3 generate_data.py
+cd ../..
+echo "System 8 Homogeneous Done"
+
+cd system8_inhomogeneous/data
+python3 generate_data.py
+cd ../..
+echo "System 8 Inhomogeneous Done"
+
 echo "All Systems Done"
