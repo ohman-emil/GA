@@ -26,12 +26,12 @@ t_max = 100
 t0 = [1, 1] # Values at t0
 
 funcs = [ # Functions
-    lambda t, data: -7.6*data[0] + -8.4*data[1],
-    lambda t, data: 7.0*data[0] + 7.6*data[1]
+    lambda t, data: 6.9*data[0] + -9.5*data[1],
+    lambda t, data: 8.2*data[0] + -6.9*data[1]
 ]
 
 a = 1
-b = 73/sqrt(26)
+b = sqrt(13/233)
 
 values = []
 error = []
@@ -41,14 +41,14 @@ for step in step_lengths:
 
     analytic_sols = [ # Analytic solutions
         a*(
-            ((-38/35)*cos((sqrt(26)/5)*time_points))-
-            ((sqrt(26)/35)*sin((sqrt(26)/5)*time_points))
+            ((69/82)*cos((sqrt(3029)/10)*time_points))-
+            ((sqrt(3029)/82)*sin((sqrt(3029)/10)*time_points))
         )+
         b*(
-            ((sqrt(26)/35)*cos((sqrt(26)/5)*time_points)+
-            (-38/35)*sin((sqrt(26)/5)*time_points))
+            ((sqrt(3029)/82)*cos((sqrt(3029)/10)*time_points)+
+            (69/82)*sin((sqrt(3029)/10)*time_points))
         ),
-        a*cos((sqrt(26)/5)*time_points)+b*sin((sqrt(26)/5)*time_points)
+        a*cos((sqrt(3029)/10)*time_points)+b*sin((sqrt(3029)/10)*time_points)
     ]
 
     temp_values = []

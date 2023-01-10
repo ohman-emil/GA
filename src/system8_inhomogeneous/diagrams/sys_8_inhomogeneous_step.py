@@ -16,23 +16,23 @@ t0 = [1, 1] # Values at t0
 time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
 
 funcs = [ # Functions
-    lambda t, data: -7.6*data[0] + -8.4*data[1] - 5.8,
-    lambda t, data: 7.0*data[0] + 7.6*data[1] - 2.3
+    lambda t, data: 6.9*data[0] + -9.5*data[1] - 8.5,
+    lambda t, data: 8.2*data[0] + -6.9*data[1] + 6.0
 ]
 
-a = 739/13
-b = 123/(2*sqrt(26))
+a = 14139/3029
+b = 73/sqrt(3029)
 
 analytic_sols = [ # Analytic solutions
     a*(
-        ((-38/35)*cos((sqrt(26)/5)*time_points))-
-        ((sqrt(26)/35)*sin((sqrt(26)/5)*time_points))
+        ((69/82)*cos((sqrt(3029)/10)*time_points))-
+        ((sqrt(3029)/82)*sin((sqrt(3029)/10)*time_points))
     )+
     b*(
-        ((sqrt(26)/35)*cos((sqrt(26)/5)*time_points)+
-        (-38/35)*sin((sqrt(26)/5)*time_points))
-    )+(1585/26),
-    a*cos((sqrt(26)/5)*time_points)+b*sin((sqrt(26)/5)*time_points)-(726/13)
+        ((sqrt(3029)/82)*cos((sqrt(3029)/10)*time_points)+
+        (69/82)*sin((sqrt(3029)/10)*time_points))
+    )-(11565/3029),
+    a*cos((sqrt(3029)/10)*time_points)+b*sin((sqrt(3029)/10)*time_points)-(11110/3029)
 ]
 
 values = []
