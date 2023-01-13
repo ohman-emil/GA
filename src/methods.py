@@ -21,7 +21,7 @@ def generateCSVData(time_points, values):
 Method: calculateError (Calculates the errors of analytic function and numerical solution)
     Arguments:
         --: --
-    Returns: A  
+    Returns: A 
 """
 def calculateError(step_length, values, analytic_sols, time_points):
     temp_error = [step_length]
@@ -29,7 +29,7 @@ def calculateError(step_length, values, analytic_sols, time_points):
         analytic_sol = analytic_sols[idx % len(analytic_sols)] # Solution obtained using eigenvalue-eigenvector method.
 
         diff = sum(abs(sol-analytic_sol)) # Difference between analytical and numeric solution.
-        function_range = max(sol)-min(sol) # Calculate range of numeric solution. Used to take an average value.
+        function_range = max(analytic_sol)-min(analytic_sol) # Calculate range of numeric solution. Used to take an average value.
 
         total_error = diff/(len(analytic_sol)*function_range)
 
