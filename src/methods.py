@@ -20,10 +20,12 @@ def generateCSVData(time_points, values):
 """
 Method: calculateError (Calculates the errors of analytic function and numerical solution)
     Arguments:
-        --: --
-    Returns: A 
+        step_length: Step length
+        values: A list of list of all numerically generated data
+        analytic_sols: A list of the analytically generated data
+    Returns: A list of errors for each list in values
 """
-def calculateError(step_length, values, analytic_sols, time_points):
+def calculateError(step_length, values, analytic_sols):
     temp_error = [step_length]
     for idx, sol in enumerate(values):
         analytic_sol = analytic_sols[idx % len(analytic_sols)] # Solution obtained using eigenvalue-eigenvector method.
