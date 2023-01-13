@@ -66,17 +66,6 @@ for step in step_lengths:
             funcs
         )
     )
-    
-    temp_error = [step]
-    for idx, sol in enumerate(temp_values):
-        analytic_sol = analytic_sols[idx % len(analytic_sols)] # Solution obtained using eigenvalue-eigenvector method.
-
-        diff = abs(sol-analytic_sol) # Difference between analytical and numeric solution. Absolute value to make integration easier
-        function_range = max(sol)-min(sol) # Calculate range of numeric solution. Used to make errors easier to compare.
-
-        temp_error.append(trapz(diff, x=time_points)/function_range)
-
-    error.append(temp_error)
 
     values.append(temp_values)
 
@@ -84,6 +73,10 @@ for step in step_lengths:
         writer = csv.writer(doc) # Create a writer instance
         writer.writerow(['t', 'euler1', 'euler2', 'heun1', 'heun2'])
         writer.writerows(methods.generateCSVData(time_points, temp_values)) # Write csv data with time points and values
+    
+    error.append(
+        methods.calculateError(step, temp_values, analytic_sols, time_points)
+    )
 
 with open('errors.csv', 'w') as doc:
     writer = csv.writer(doc) # Create a writer instance
