@@ -40,3 +40,50 @@ def calculateError(step_length, values, analytic_sols):
         temp_error.append(total_error)
     
     return temp_error
+
+"""
+Methodd: createTikZStructure
+    Arguments:
+        --: --
+    Returns: 
+"""
+colors_list = [[0, 114, 189], [217, 83, 25], [237, 177, 32], [126, 47, 142], [119, 172, 48], [77, 190, 238], [162, 20, 47]]
+def createTikZStructure(axis_options, plot_options, data, legend_data, colors = colors_list):
+    file_contents = '% Automatically generated code. github.com/ohman-emil/GA\n'
+    file_contents += f'\\begin{{tikzpicture}}\n'
+
+    axis_options_string = ""
+    for option in axis_options.items():
+        if not option[1]: axis_options_string += f'{option[0]},' # Some options do not require a value. If options[1] is set to false, omit a value.
+
+        else: axis_options_string += f'{option[0]}={option[1]},'
+
+    # Add color definitions
+    for color_idx, color in enumerate(colors):
+        file_contents += f'\definecolor{{clr{color_idx}}}{{RGB}}{{{str(color)[1:-1]}}}\n'
+
+    file_contents += f'\\begin{{axis}}[{axis_options_string}]\n' # Begin axis environment. Add the axis options as well
+
+    # Loop over every system and add TikZ code with data to file_contents
+    for data_idx, data_value in enumerate(data):
+        # Convert the options into a TikZ-friendly format
+        plot_options_string = ""
+        for option in plot_options.items():
+            plot_options_string += f'{option[0]}={option[1]},'
+        
+        if colors:
+            plot_options_string += f'color=clr{data_idx % len(colors)}'
+
+        file_contents += f'\\addplot[{plot_options_string}] table {{\n' # Begin the plot
+
+        for data_field in data_value:
+            file_contents += f'{data_field[0]} {data_field[1]}\n' # Write the current step length (0th element) together with the data value
+
+        file_contents += '};\n' # End the plot
+        
+        if legend_data:
+            file_contents += f'\\addlegendentry{{{legend_data[data_idx]}}}\n' # Add the header in the csv-file as a legend entry.
+        
+    file_contents += f'\\end{{axis}}\n\\end{{tikzpicture}}' # End the TikZ and axis environments
+
+    return file_contents

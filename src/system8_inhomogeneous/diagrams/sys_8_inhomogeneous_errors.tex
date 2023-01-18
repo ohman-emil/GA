@@ -8,7 +8,7 @@
 \definecolor{clr5}{RGB}{77, 190, 238}
 \definecolor{clr6}{RGB}{162, 20, 47}
 \begin{axis}[xmode=log,xlabel=Steglängd,ylabel=Avvikelse,width=\textwidth,height=0.6\textwidth,grid=both,minor grid style={draw=gray!33},major grid style={draw=gray},legend pos=north west,]
-\addplot[line width=1pt,mark=*,color=clr0,] table {
+\addplot[line width=1pt,mark=*,color=clr0] table {
 0.1 0.3176776144730623
 0.05 0.31629328080870855
 0.025 0.3135911512832405
@@ -18,8 +18,8 @@
 0.0015625 0.2353342787662127
 0.00078125 0.17425605468448058
 };
-\addlegendentry{Euler1}
-\addplot[line width=1pt,mark=*,color=clr1,] table {
+\addlegendentry{Euler 1}
+\addplot[line width=1pt,mark=*,color=clr1] table {
 0.1 0.31688808656869427
 0.05 0.3156179456220494
 0.025 0.31296376530555076
@@ -29,8 +29,8 @@
 0.0015625 0.23478368068431818
 0.00078125 0.17378330511036216
 };
-\addlegendentry{Euler2}
-\addplot[line width=1pt,mark=*,color=clr2,] table {
+\addlegendentry{Euler 2}
+\addplot[line width=1pt,mark=*,color=clr2] table {
 0.1 2359.5900122340317
 0.05 0.7311305536481064
 0.025 0.27557101953059543
@@ -40,8 +40,8 @@
 0.0015625 0.0010784629803140481
 0.00078125 0.000269615782021785
 };
-\addlegendentry{Heun1}
-\addplot[line width=1pt,mark=*,color=clr3,] table {
+\addlegendentry{Heun 1}
+\addplot[line width=1pt,mark=*,color=clr3] table {
 0.1 2341.20052693826
 0.05 0.7316512308482195
 0.025 0.27524547697604385
@@ -51,6 +51,6 @@
 0.0015625 0.0010786808965929991
 0.00078125 0.00026966793622824913
 };
-\addlegendentry{Heun2}
+\addlegendentry{Heun 2}
 \end{axis}
 \end{tikzpicture}
