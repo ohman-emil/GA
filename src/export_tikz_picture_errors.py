@@ -26,6 +26,7 @@ for step_length_idx, step_length_data in enumerate(data):
 # Specify the axis and plot environment options
 axis_options = {
     'xmode': 'log',
+    'ymode': 'log',
     'xlabel': 'Steglängd',
     'ylabel': 'Avvikelse',
     'width': '\\textwidth',

@@ -26,19 +26,21 @@ Method: calculateError (Calculates the errors of analytic function and numerical
     Returns: A list of errors for each list in values
 """
 def calculateError(step_length, values, analytic_sols):
+    from numpy import subtract
+
     temp_error = [step_length]
     for idx, sol in enumerate(values):
-        analytic_sol = analytic_sols[idx % len(analytic_sols)] # Solution obtained using eigenvalue-eigenvector method.
+        analytic_sol = analytic_sols[idx % len(analytic_sols)]
 
-        diff = sum(abs(sol-analytic_sol)) # Difference between analytical and numeric solution.
-        function_range = max(analytic_sol)-min(analytic_sol) # Calculate range of numeric solution. Used to take an average value.
+        diff_list = subtract(sol, analytic_sol) # Subtract the values from each list
+        diff_list = [abs(element) for element in diff_list] # Take the absolute value of each entry
+        diff = sum(diff_list)#/len(diff_list) # Sum everything
 
-        total_error = diff/(len(analytic_sol)*function_range)
+        print(idx, diff, step_length, len(diff_list))
 
-        print(idx, total_error)
-
-        temp_error.append(total_error)
+        temp_error.append(diff)
     
+    print('')
     return temp_error
 
 """
