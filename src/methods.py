@@ -44,7 +44,7 @@ def calculateError(step_length, values, analytic_sols):
     return temp_error
 
 """
-Methodd: createTikZStructure
+Method: createTikZStructure
     Arguments:
         --: --
     Returns: 
@@ -77,6 +77,8 @@ def createTikZStructure(axis_options, plot_options, data, legend_data, colors = 
             plot_options_string += f'color=clr{data_idx % len(colors)}'
 
         file_contents += f'\\addplot[{plot_options_string}] table {{\n' # Begin the plot
+
+        print(data_value)
 
         for data_field in data_value:
             file_contents += f'{data_field[0]} {data_field[1]}\n' # Write the current step length (0th element) together with the data value
