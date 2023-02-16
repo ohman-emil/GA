@@ -36,14 +36,18 @@ axis_options = {
     'grid': 'both',
     'minor grid style': '{draw=gray!33}',
     'major grid style': '{draw=gray}',
-    'legend pos': 'north west'
+    'legend pos': 'north west',
+    'legend columns': '2',
+    'legend style': '{column sep=1.5ex}'
 }
 
 plot_options = {
     'line width': '1pt',
     'mark': '*'
 }
-    
+
+legend = ['\hspace{{-1.25ex}}' + item for item in ['1', '2', '3', '4', '5', '6', '7', '8']]
+
 # Open file and add the file contents
 with open(f'src/diagrams/diff_euler_heun.tex', 'w') as file_to_write:
     file_to_write.write(
@@ -51,6 +55,6 @@ with open(f'src/diagrams/diff_euler_heun.tex', 'w') as file_to_write:
             axis_options,
             plot_options,
             mod_data,
-            ['1', '2', '3', '4', '5', '6', '7', '8']
+            legend
         )
     )

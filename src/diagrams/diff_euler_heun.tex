@@ -7,7 +7,7 @@
 \definecolor{clr4}{RGB}{119, 172, 48}
 \definecolor{clr5}{RGB}{77, 190, 238}
 \definecolor{clr6}{RGB}{162, 20, 47}
-\begin{axis}[xmode=log,ymode=log,xlabel=Steglängd,ylabel=Andelsskillnad,width=\textwidth,height=0.6\textwidth,grid=both,minor grid style={draw=gray!33},major grid style={draw=gray},legend pos=north west,]
+\begin{axis}[xmode=log,ymode=log,xlabel=Steglängd,ylabel=Andelsskillnad,width=\textwidth,height=0.6\textwidth,grid=both,minor grid style={draw=gray!33},major grid style={draw=gray},legend pos=north west,legend columns=2,legend style={column sep=1.5ex},]
 \addplot[line width=1pt,mark=*,color=clr0] table {
 0.1 0.027371900652614304
 0.05 0.005134193726296163
@@ -18,7 +18,7 @@
 0.0015625 0.00018866621970747673
 0.00078125 9.025619112498645e-05
 };
-\addlegendentry{1}
+\addlegendentry{\hspace{{-1.25ex}}1}
 \addplot[line width=1pt,mark=*,color=clr1] table {
 0.1 0.012935483489307962
 0.05 0.002138928080102738
@@ -29,7 +29,7 @@
 0.0015625 0.00010457325006417411
 0.00078125 5.875236492113106e-05
 };
-\addlegendentry{2}
+\addlegendentry{\hspace{{-1.25ex}}2}
 \addplot[line width=1pt,mark=*,color=clr2] table {
 0.1 0.25570867072715087
 0.05 0.033491343851594545
@@ -40,7 +40,7 @@
 0.0015625 0.0005850731126304608
 0.00078125 0.0002593253548676337
 };
-\addlegendentry{3}
+\addlegendentry{\hspace{{-1.25ex}}3}
 \addplot[line width=1pt,mark=*,color=clr3] table {
 0.1 0.12092533825709885
 0.05 0.038016455135128
@@ -51,7 +51,7 @@
 0.0015625 0.0007113345611299891
 0.00078125 0.00033666504966899016
 };
-\addlegendentry{4}
+\addlegendentry{\hspace{{-1.25ex}}4}
 \addplot[line width=1pt,mark=*,color=clr4] table {
 0.1 1.6253637284812188
 0.05 0.4267403538795173
@@ -62,7 +62,7 @@
 0.0015625 0.0029901557975918016
 0.00078125 0.0013522858138240942
 };
-\addlegendentry{5}
+\addlegendentry{\hspace{{-1.25ex}}5}
 \addplot[line width=1pt,mark=*,color=clr5] table {
 0.1 0.026093931201084566
 0.05 0.0032496697338776246
@@ -73,7 +73,7 @@
 0.0015625 0.00014933472384012268
 0.00078125 7.477569924368722e-05
 };
-\addlegendentry{6}
+\addlegendentry{\hspace{{-1.25ex}}6}
 \addplot[line width=1pt,mark=*,color=clr6] table {
 0.1 0.007657656143286117
 0.05 0.001156413232077404
@@ -84,7 +84,7 @@
 0.0015625 3.2342533825914594e-05
 0.00078125 2.5625453429318645e-05
 };
-\addlegendentry{7}
+\addlegendentry{\hspace{{-1.25ex}}7}
 \addplot[line width=1pt,mark=*,color=clr0] table {
 0.1 1.9453521486609155
 0.05 0.21938579470306932
@@ -95,6 +95,6 @@
 0.0015625 0.0019268765127308895
 0.00078125 0.0007102133320153945
 };
-\addlegendentry{8}
+\addlegendentry{\hspace{{-1.25ex}}8}
 \end{axis}
 \end{tikzpicture}
