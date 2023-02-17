@@ -26,20 +26,14 @@ Method: calculateError (Calculates the errors of analytic function and numerical
     Returns: A list of errors for each list in values
 """
 def calculateError(step_length, values, analytic_sols):
-    from numpy import subtract
-
     temp_error = [step_length]
     for idx, sol in enumerate(values):
         analytic_sol = analytic_sols[idx % len(analytic_sols)]
 
-        diff_list = subtract(sol, analytic_sol) # Subtract the values from each list
-        diff_list = [abs(element) for element in diff_list] # Take the absolute value of each entry
-        diff = sum(diff_list)#/len(diff_list) # Sum everything
-
-        print(idx, diff, step_length, len(diff_list))
-
-        temp_error.append(diff)
+        temp_error.append(abs(analytic_sol[-1]-sol[-1]))
     
+    print(temp_error)
+
     print('')
     return temp_error
 
@@ -49,7 +43,7 @@ Method: createTikZStructure
         --: --
     Returns: 
 """
-colors_list = [[0, 114, 189], [217, 83, 25], [237, 177, 32], [126, 47, 142], [119, 172, 48], [77, 190, 238], [162, 20, 47]]
+colors_list = [[0, 114, 189], [217, 83, 25], [237, 177, 32], [126, 47, 142], [119, 172, 48], [77, 190, 238], [162, 20, 47], [120, 120, 120]]
 def createTikZStructure(axis_options, plot_options, data, legend_data, colors = colors_list):
     file_contents = '% Automatically generated code. github.com/ohman-emil/GA\n'
     file_contents += f'\\begin{{tikzpicture}}\n'

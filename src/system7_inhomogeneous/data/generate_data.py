@@ -20,10 +20,9 @@ from numpy import linspace, cos, sin, arange
 import methods
 import solvers
 
-step_lengths = [0.1, 0.05, 0.025, 0.0125, 0.00625, 0.003125, 0.0015625, 0.00078125]
+step_lengths = [0.05, 0.025, 0.0125, 0.00625, 0.003125, 0.0015625, 0.00078125, 0.000390625]
 
-t_max = 100
-total_points=100
+t_max = 20
 t0 = [1, 1] # Values at t0
 
 funcs = [ # Functions
@@ -38,7 +37,7 @@ values = []
 error = []
 
 for step in step_lengths:
-    time_points = linspace(0, total_points*step, num=total_points) # Create a list of all time values for which the function should be evaluated
+    time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
 
     analytic_sols = [ # Analytic solutions
         a*(

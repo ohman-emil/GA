@@ -34,7 +34,9 @@ axis_options = {
     'grid': 'both',
     'minor grid style': '{draw=gray!33}',
     'major grid style': '{draw=gray}',
-    'legend pos': 'north west'
+    'legend pos': 'south east',
+    'legend columns': '2',
+    'legend style': '{column sep=1.5ex}'
 }
 
 plot_options = {
@@ -49,6 +51,6 @@ with open(f'src/system{system}/diagrams/sys_{system}_errors.tex', 'w') as file_t
             axis_options,
             plot_options,
             mod_data,
-            ['Euler 1', 'Euler 2', 'Heun 1', 'Heun 2']
+            ['\hspace{{-1.25ex}}' + item for item in ['Euler 1', 'Euler 2', 'Heun 1', 'Heun 2']]
         )
     )

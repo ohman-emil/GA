@@ -11,10 +11,9 @@ from numpy import arange, cos, sin
 import solvers
 
 step = 0.001953125
-t_max = 100
-total_points=100
+t_max = 20
 t0 = [1, 1] # Values at t0
-time_points = linspace(0, total_points*step, num=total_points) # Create a list of all time values for which the function should be evaluated
+time_points = arange(0, t_max, step) # Create a list of all time values for which the function should be evaluated
 
 funcs = [ # Functions
     lambda t, data: -3.6*data[0] + -2*data[1],
