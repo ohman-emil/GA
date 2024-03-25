@@ -1,0 +1,59 @@
+\section{Bevis av den generaliserade medelvärdessatsen}\label{proof_generalised_mvt}
+För att bevisa den generaliserade medelvärdessatsen definieras
+\begin{equation*}
+    h(x)=(f(b)-f(a))(g(x)-g(a))-(g(b)-g(a))(f(x)-f(a))
+\eqph{.}\end{equation*} Genom applicera medelvärdessatsen på denna ges
+\begin{equation}
+    \frac{h(b)-h(a)}{b-a}=h'(\xi)
+\eqph{.}\end{equation} Notera att \(h(a)=h(b)=0\), vilket innebär att det finns en punkt \(\xi\) inom \((a, b)\) sådant att \(h'(\xi)=0\). Således,
+\begin{equation}
+    h'(\xi)=(f(b)-f(a))g'(\xi)-(g(b)-g(a))f'(\xi)=0
+\eqph{,}\end{equation} vilket kan omskrivas som
+\begin{equation}
+    \frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\xi)}{g'(\xi)}
+\eqph{,}\end{equation} och satsen anses således bevisad \parencite[141-142]{adams_calculus_2010}.
+
+\clearpage
+
+\section{Bevis för resttermen i Taylors teorem}\label{proof_taylors_theorem}
+Resttermen i Taylors teorem bevisas med hjälp av induktion. För fallet \(k=0\) lyder Taylors teorem
+\begin{equation}
+    f(x)=f(x_0)+R_n(x)=f(x_0)+f'(\xi)(x-x_0)
+\eqph{.}\end{equation} Denna kan omskrivas till
+\begin{equation}
+    \frac{f(x)-f(x_0)}{x-x_0}=f'(\xi)
+\end{equation} vilket är ekvivalent med medelvärdessatsen, och anses således bevisat. För fallet \(k=n-1\) ges
+\begin{equation}
+    R_{n-1}=\frac{(x-x_0)^n}{n!}f^{(n)}(\xi)
+\eqph{.}\end{equation} Detta är induktionsantagandet. Antag sedan att \(x>x_0\) (för fallet \(x<x_0\) är beviset liknande, men genomförs inte här). Betrakta uttrycket
+\begin{equation}
+    \frac{R_n(x)}{(x-x_0)^{n+1}}
+\eqph{.}\end{equation} \(R_n(x_0)=0\), och \((x_0-x_0)^{n+1}=0\), vilket innebär att ekvationen ovan kan skrivas
+\begin{equation}
+    \frac{R_n(x)-R_n(x_0)}{(x-x_0)^{n+1}-(x_0-x_0)^{n+1}}
+\eqph{.}\end{equation} Denna är på formen i (\ref{eq:general_mean_value_theorem}) där \(f(x)=R_n(x)\) och \(g(x)=(x-x_0)^{(n+1)}\). Den generaliserade medelvärdessatsen kan följaktligen användas, vilket ger
+\begin{equation}
+    \frac{R'_n(u)}{(n+1)(u-x_0)^n}
+\end{equation} där \(u\) är en punkt mellan \(x_0\) och \(x\). Resttermen \(R_n(x)\) kan skrivas
+\begin{equation}
+    \begin{split}
+        R_n(x)=&f(x)-p_n(x)\\
+        =&f(x)-f(x_0)-f'(x_0)(x-x_0)-\frac{(x-x_0)^2}{2!}f''(x_0)-\cdots-\frac{(x-x_0)^n}{n!}f^{(n)}(x_0)
+    \end{split}
+\end{equation} och \(R'_n(u)\) kan således skrivas
+\begin{equation}
+    \begin{split}
+        R'_n(u)=&\frac{d}{dx}\left(f(x)-f(x_0)-f'(x_0)(x-x_0)-\cdots-\frac{(x-x_0)^n}{n!}f^{(n)}(x_0)\right)\Bigr|_{x=u}\\
+        =&f'(u)-f'(x_0)-f''(x_0)(u-x_0)-\cdots-\frac{(u-x_0)^{n-1}}{(n-1)!}f^{(n)}(x_0)
+    \end{split}
+\end{equation} Denna är \(R_{n-1}(u)\) för funktionen \(f'\). Genom induktionsantagandet är denna lika med
+\begin{equation}
+    \frac{(u-x_0)^n}{n!}(f')^{(n)}(\xi)=\frac{(u-x_0)^n}{n!}f^{(n+1)}(\xi)
+\eqph{.}\end{equation} Denna är lika med \(R'_n(t)\) och således gäller att
+\begin{equation}
+    \frac{R'_n(u)}{(n+1)(u-x_0)^n}=\frac{\frac{(u-x_0)^n}{n!}f^{(n+1)}(\xi)}{(n+1)(u-x_0)^n}=\frac{f^{n+1}(\xi)}{(n+1)!}
+\eqph{.}\end{equation}
+Om båda sidor multipliceras med \((x-x_0)^{n+1}\) ges
+\begin{equation}
+    R_n(x)=\frac{(x-x_0)^{n+1}}{(n+1)!}f^{(n+1)}(\xi)
+\eqph{.}\end{equation} Således har fallet \(k=n\) bevisats med antagandet att \(k=n-1\) är sant. Restsatsen i Taylors teorem är därmed bevisad \parencite[274-275]{adams_calculus_2010}.

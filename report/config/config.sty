@@ -1,0 +1,97 @@
+% PACKAGE IMPORT
+\usepackage{amsmath} % Math typesetting
+\usepackage[dvipsnames]{xcolor} % Colors
+\usepackage[
+    colorinlistoftodos=true,
+    textwidth=3cm,
+    swedish,
+    backgroundcolor=SpringGreen,
+    %backgroundcolor=White,
+    linecolor=black
+]{todonotes} % Comments inside doc
+\usepackage{enumitem} % Lists
+\usepackage[labelfont={bf}]{caption}
+\usepackage{bbold}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{tabularx}
+%\usepackage{physics}
+\usepackage{svg}
+\usepackage{subcaption}
+\usepackage[symbol]{footmisc}
+\usepackage{perpage}
+\usepackage{amssymb}
+\usepackage{delarray}
+\usepackage{setspace}
+\usepackage[toc]{appendix}
+
+\usepackage{geometry}
+\geometry{a4paper, margin=1.5in}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    pdftitle={GA Emil Öhman, N20a},
+    pdfauthor={Emil Öhman},
+    pdfkeywords={Kopplade differentialekvationer, Numeriska lösningsmetoder, Eulers metod, Heuns metod},
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=blue
+}
+
+% Tikz
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{backgrounds}
+
+% General Settings
+\renewcommand{\arraystretch}{1.5} % Table spacing
+\setlist[enumerate]{topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex}
+\numberwithin{equation}{section}
+\usepackage[skip=0.75\baselineskip]{parskip}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}} % Footnote style
+\MakePerPage{footnote} % Reset footnote counter on every page
+
+%\setlength{\parskip}{\baselineskip}
+%\setlength{\parindent}{0pt}
+
+\addto\captionsswedish{\renewcommand{\listfigurename}{Lista över figurer}}
+\addto\captionsswedish{\renewcommand{\listtablename}{Lista över tabeller}}
+
+
+% Headers and Footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage}
+
+% Macros and shortcuts
+\renewcommand{\Re}{\mathrm{Re}}
+\renewcommand{\Im}{\mathrm{Im}}
+\newcommand{\pmtx}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\bmtx}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\overbar}[1]{\mkern 4mu\overline{\mkern-4mu#1\mkern-4mu}\mkern 4mu}
+\newcommand{\eqph}[1]{\quad\mathrm{#1}\!\!\!\!\!\!}
+\newcommand{\ordo}{\mathcal{O}}
+\newcommand{\sref}{}%s. }
+
+\newcommand{\tblh}{\noalign{\hrule height 1.25pt}} % Thicker hline in table
+\newcommand{\tblv}{\vrule width 1.25pt} % Usage: !{\tblv} instead of |
+\newcommand{\tblc}[1]{\multicolumn{1}{c}{#1}} % Center text in one table cell
+
+%\newcommand{\svgsubcap}[1]{\subfloat[#1]{\hspace{\textwidth}}}
+\newcommand{\svgsubcap}[1]{
+    \begin{minipage}[t]{\textwidth}
+        \captionsetup[subfigure]{skip=-1em}
+        \centering
+        \subcaption{#1}
+    \end{minipage}
+}
+
+\newcolumntype{M}{>{\(}c<{\)}} % Math-mode version of "c" column type

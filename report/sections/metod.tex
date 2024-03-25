@@ -1,0 +1,130 @@
+\section{Metod och materiel}
+Denna undersökning baseras på kvantitativ data framtagen med hjälp av datorprogram. Detta för att jämföra och dra slutsatser om de metoder som användes. Som komplement användes stundom kvalitativa analysmetoder.
+
+All kod, rådata och diagram i \texttt{svg}- eller \texttt{TeX}-format samt källkoden till denna rapport finns tillgänglig på GitHub på adressen \href{http://github.com/ohman-emil/GA}{github.com/ohman-emil/GA}. % Hello!
+
+\subsection{Eulers metod i Python}
+En funktion skrevs i Python som löser kopplade differentialekvationer. Indatan till funktionen är en lista med alla begynnelsevillkor, kallad \texttt{t0}, en lista med alla tidpunkter, \texttt{t\_values}, och en lista med alla funktioner, kallad \texttt{func}. Först skapas en lista, \texttt{values}, i vilken alla \texttt{t0}-värden läggs till i:
+\begin{pycode}
+values = [] # List of lists of all values, 2d list
+[values.append([val]) for val in t0] # Add all initial values to values list
+\end{pycode}
+Därefter startas en \texttt{for}-loop över alla värden i \texttt{t\_values}. I den beräknas först steglängden, \texttt{step\_size}, genom att subtrahera den nuvarande tidpunkten med den föregående. Ännu en \texttt{for}-loop startas senare, denna gång loopad över funktionerna. I den beräknas lutningen genom att anropa funktionen med den nuvarande tidpunkten samt en lista med alla tidigare funktionsvärden som indata. Sedan räknas det nya värdet ut, och läggs till i \texttt{values}:
+\begin{pycode}
+for t_idx, t in enumerate(t_values):
+    # Because the initial values are already appended, we skip over them here
+    if (t_idx == 0): continue
+
+    step_size = (t - t_values[t_idx - 1]) # Difference between previous and current time point
+
+    # Loop through all functions and calculate their slope
+    for idx, f in enumerate(func):
+        curr_slope = f(t, [var[-1] for var in values]) # Calculate slope for the current function
+
+        new_value = values[idx][-1] + step_size * curr_slope # Calculate the new value
+
+        values[idx].append(new_value) # Append new value to list
+\end{pycode}
+Slutligen returneras \texttt{values}:
+\begin{pycode}
+return values
+\end{pycode}
+
+\subsection{Heuns metod i Python}
+Koden för Heuns metod skiljer sig endast i hur lutningen, det vill säga derivatan, beräknas. Först behöver alla funktionsvärden då \(t=t_n\) förutspås, innan lutningen för \(t=t_{n-1}\) kan beräknas, och tillslut beräkna medelvärdet. I koden för Heuns metod skapas först en lista med alla tidigare funktionsvärden:
+\begin{pycode}
+latest_func_values = [var[-1] for var in values] # Create a list of all the last function values
+\end{pycode}
+Sedan skapades en lista, \texttt{x\_hat}, där alla förutspådda värden för \(t=t_n\) placeras i. Därefter skapas en \texttt{for}-loop över alla funktioner. I den räknas det föruspådda värdet ut för vardera funktion, och läggs till i \texttt{x\_hat}:
+\begin{pycode}
+x_hat = [] # List of all predicted function values
+for idx, f in enumerate(func):
+    predicted_slope = f(t, latest_func_values) # Calculate slope for the current function
+    predicted_value = values[idx][-1] + step_size * predicted_slope # Calculate the new value
+    x_hat.append(predicted_value)
+\end{pycode}
+Därefter skapades ännu en \texttt{for}-loop, återigen över funktionerna. Denna gång räknas det nya värdet ut, och läggs till i \texttt{values}-listan, likt Eulers metod:
+\begin{pycode}
+for idx, curr_func in enumerate(functions): # Loop through all functions and calculate their slope
+    new_value = values[idx][-1] + 0.5*step_size*( # Calculate new value using Heun's method
+        curr_func(t, latest_func_values) + curr_func(t, x_hat)
+    )
+
+    values[idx].append(new_value) # Append new value to list
+\end{pycode}
+
+\subsection{Att rita grafer}
+\subsubsection{Matplotlib}
+För att rita grafer användes Python-biblioteket \texttt{matplotlib}. Först skapades så kallade \texttt{subplots}, vilket kan liknas med diagram. Därefter anropades \texttt{plot} med tidpunkterna och värdena vid de tidpunkterna som indata. Dessutom användes \texttt{fill\_between}-metoden, som ``fyller'' utrymmet mellan två funktioner. Den kräver tidpunkterna och två listor med värden som indata. För att visa den ritade grafen anropades \texttt{show}-metoden. Dessutom kan \texttt{savefig}-metoden anropas för att spara grafen som en fil.
+
+\subsubsection{pgfplots}
+Dessutom användes \LaTeX-paketet \texttt{pgfplots} för att rita grafer. \texttt{pgfplots} används för att rita figurer i \LaTeX-dokument, och användes därför för de genererade diagrammen i den slutgiltiga rapporten. Detta gjordes genom att starta en \texttt{tikzpicture}-miljö i \LaTeX, varefter \texttt{\textbackslash addplot} lades till, med all data. Källkoden för varje diagram lades i varsin fil, och kan sedan enkelt läggas in i rapporten med hjälp av \texttt{\textbackslash input}. Ett Python-skript skrevs för att underlätta i skapandet av dessa diagram.
+
+\subsection{Avvikelsekvantifiering}
+Antalet punkter sattes till 100. 8 steglängder testades för varje system, med 0.05 som längst och resten i en logaritmisk skala med bas 2 (se tabell \ref{tbl:steplength_table}). Avvikelsen kvantifierades genom att beräkna skillnaden mellan det analytiska värdet och det numeriskt uträknade värdet vid den sista tidpunkten. Det är alltså det globala trunkeringsfelet vid den sista punkten som används. Dessutom togs absolutvärdet, eftersom dess tecken är irrelevant inom denna undersökning.
+
+\begin{table}[h!]
+    \centering
+    \caption{De steglängder som undersöktes för varje system.}
+    \label{tbl:steplength_table}
+    \begin{tabular}{rl}
+        \tblh
+        Försök & Steglängd\\
+        \hline
+        1 & 0.05\\
+        2 & 0.025\\
+        3 & 0.0125\\
+        4 & 0.00625\\
+        5 & 0.003125\\
+        6 & 0.0015625\\
+        7 & 0.00078125\\
+        8 & 0.000390625\\
+        \tblh
+    \end{tabular}
+\end{table}
+
+\subsection{Generering av system}
+De system som undersöktes valdes genom en pseudo-slumptalsgenerator med gränser \(-10\) respektive \(10\). Först genererades \(a_{11}\), varefter \(a_{22}\) sattes till \(-a\). Därpå genererades för jämna system \(a_{12}\), och för ojämna system \(a_{21}\). Därefter genererades \(a_{12}\) eller \(a_{21}\) tills villkoren i ekvation \ref{eq:conditions_periodicty} var uppfyllda. För system 5, 6, 7 och 8 genererades två värden till en konstant vektor som adderades. Stundtals var det inte möjligt att generera ett tal som uppfyller alla villkor, och då förkastades alla redan genererade tal och processen startades om. De systemen som kommer undersökas finnes i tabell \ref{tbl:systems_table}. Begynnelsevillkoren för både \(x_1\) och \(x_2\) sattes till 1.
+
+\begin{table}[h!]
+    \centering
+    \caption{De system som kommer undersökas.}
+    \label{tbl:systems_table}
+    \begin{tabular}{
+        l@{\hskip 0.4in}
+        l
+    }
+        \tblh
+        
+        System & Definition\\
+        
+        \hline\rule{0px}{2.75em}
+        
+        System 1 & \(X'=\begin{pmatrix}5.4 & -3.4 \\ 9.2 & -5.4\end{pmatrix}X\)\vspace{1em}\\
+        
+        System 2 & \(X'=\begin{pmatrix}-3.6 & -2.0 \\ 7.1 & 3.6\end{pmatrix}X\)\vspace{1em}\\
+        
+        System 3 & \(X'=\begin{pmatrix}7.8 & -9.6 \\ 7.3 & -7.8\end{pmatrix}X\)\vspace{1em}\\
+        
+        System 4 & \(X'=\begin{pmatrix}-2.0 & 3.1 \\ -2.6 & 2.0\end{pmatrix}X\)\vspace{1em}\\
+        
+        System 5 & \(X'=\begin{pmatrix}2.3 & 5.0 \\ -5.8 & -2.3\end{pmatrix}X + \begin{pmatrix}-2.5\\6.5\end{pmatrix}\)\vspace{1em}\\
+        
+        System 6 & \(X'=\begin{pmatrix}7.2 & 9.8 \\ -5.5 & -7.2\end{pmatrix}X + \begin{pmatrix}-1.4\\4.1\end{pmatrix}\)\vspace{1em}\\
+        
+        System 7 & \(X'=\begin{pmatrix}-7.6 & -8.4 \\ 7.0 & 7.6\end{pmatrix}X + \begin{pmatrix}-5.8\\-2.3\end{pmatrix}\)\vspace{1em}\\
+        
+        System 8 & \(X'=\begin{pmatrix}6.9 & -9.5 \\ 8.2 & -6.9\end{pmatrix}X + \begin{pmatrix}-8.5\\6.0\end{pmatrix}\)\vspace{0.75em}\\
+        
+        \tblh
+    \end{tabular}
+\end{table}
+
+\subsection{Källkritik}
+Huvuddelen av detta arbete baseras på boken \citetitle{zill_differential_2005} av \citeauthor{zill_differential_2005} (\citeyear{zill_differential_2005}). Utöver den har jag använt diverse andra böcker, såsom \citetitle{suli_introduction_2003} av \citeauthor{suli_introduction_2003} (\citeyear{suli_introduction_2003}) och \citetitle{atkinson_introduction_1989} av \citeauthor{atkinson_introduction_1989} (\citeyear{atkinson_introduction_1989}). Vid internetkällor har någorlunda utförliga källkritiska analys gjorts. Dessutom har, om möjligt, källor jämförts för att öka källornas trovärdighet.
+
+\subsection{Avgränsningar}
+Detta arbete berör endast kopplade differentialekvationer på formen
+\begin{equation}
+    \pmtx{x'\\y'}=\pmtx{a&b\\c&d}\pmtx{x\\y}+\pmtx{\alpha\\\beta}
+\end{equation} samt endast ett sätt att lösa dessa på analytiskt. Dessutom undersöktes endast 8 system, varav 4 inhomogena. Dessa avgränsningar nödvändiggjordes av brist på relevant kunskap och tid. Utöver detta undersöktes endast två numeriska lösningsmetoder, för att minska rapportens omfång och, som följd, arbetsbördan. Datamängden att analysera begränsades även av urvalet av steglängder. Desto fler steglängder, desto mer data att tolka, analysera och behandla, vilket också ökar arbetsbördan markant.

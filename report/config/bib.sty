@@ -1,0 +1,32 @@
+\usepackage[
+    %style=numeric-comp,
+    style=authoryear-comp,
+    dashed=false, % remove for numeric-comp
+    sorting=nyt, % none for numeric-comp; nyt for authoryear-comp
+    giveninits=false,
+    uniquename=init,
+    backend=biber,
+    language=swedish,
+    maxbibnames=5,
+    maxcitenames=2,
+    urldate=iso,
+    seconds=true
+    %natbib
+]{biblatex}
+\usepackage{csquotes}
+
+\DeclareLabeldate{
+    \field{date}
+    \field{year}
+    \field{eventdate}
+    \field{origdate}
+    \literal{nodate}
+}
+
+\setlength\bibitemsep{0.75\baselineskip}
+\addbibresource{references.bib}
+\DeclareNameAlias{sortname}{family-given}
+%\DeclareNameAlias{sortname}{given-family}
+\renewbibmacro{in:}{} % Remove "In:"
+\renewcommand*{\multinamedelim}{;\space} % semicolon between authors
+%\renewcommand*{\multinamedelim}{,\space} % comma between authors

@@ -1,0 +1,16 @@
+\section{Inledning}
+\subsection{Bakgrund}
+En stor del av matematiken behandlar matematiska modeller, som ofta är formulerade i form av kopplade differentialekvationer. Några av dessa går att lösa analytiskt, men de flesta kan endast lösas numeriskt, med så kallade numeriska lösningmetoder. Det matematiska område som behandlar dessa metoder kallas ofta numerisk analys \parencite[vii]{suli_introduction_2003}. För att lösa detta används ofta datorer i syfte att approximera lösningen i väldigt många punkter, som sedan närmar sig den exakta lösningen. Numeriska lösningsmetoder är emellertid inte perfekta; de kan aldrig lösa ett problem med fullständig precision \parencite[1]{remani_numerical_2012}. Vissa metoder gör detta bättre än andra. Till de mer enkla modellerna finns Eulers metod. Detta behöver däremot inte vara negativt; mer komplicerade metoder kräver väldigt mycket mer datorkraft, och därför kan till exempel Eulers metod ibland vara den mest fördelaktiga. Heuns metod är en vidareutveckling av Eulers metod, och ger generellt sätt mer precisa lösningar. Den kräver likväl mer datorkraft \parencite[328]{suli_introduction_2003}.
+
+Numeriska lösningsmetoder är vitala för forskning inom tillämpad matematik, eftersom en exakt lösning inte alltid efterfrågas. Till exempel används numeriska lösningsmetoder för differentialekvationer för att kartlägga spridningen av COVID-19 eller HIV-AIDS \parencites{pratiwi_eulers_2021}{simangunsong_fourth_2021}, populationsdynamik i mikrobiom \parencite{remien_structural_2021} och trafikflöde \parencite{nagel_still_2003}. I alla dessa användningsområden är noggrannheten för den numeriska lösningen av intresse.
+
+\subsection{Syfte}
+Detta arbete syftar till att jämföra Eulers och Heuns metod med analytiska metoder, det vill säga exakta lösningar, för att försöka avgöra hur bra de lösningsmetoderna är, och därmed försöka dra slutsatser om dess användnings\-områden. Dessutom kommer olika steglängder i Eulers och Heuns metod jämföras, för att försöka avgöra skillnaden i noggrannhet.
+
+För att göra detta behöver den analytiska lösningen fastställas, och därför kommer detta arbete även inkludera förklaringar till egenvärde-egenvektor-metoden för att lösa kopplade differentialekvationer.
+
+\subsection{Frågeställningar}
+\begin{enumerate}[label={\bfseries\Roman*}]%[label=\textbf{\arabic*}.]
+\item Hur påverkar steglängden noggrannheten i Eulers respektive Heuns metod i periodiska kopplade differentialekvationer?
+\item Hur skiljer sig Eulers och Heuns metod i noggrannhet för att lösa periodiska kopplade differentialekvationer?
+\end{enumerate}

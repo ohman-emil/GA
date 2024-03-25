@@ -1,0 +1,57 @@
+% Automatically generated code. github.com/ohman-emil/GA
+\begin{tikzpicture}
+\definecolor{clr0}{RGB}{0, 114, 189}
+\definecolor{clr1}{RGB}{217, 83, 25}
+\definecolor{clr2}{RGB}{237, 177, 32}
+\definecolor{clr3}{RGB}{126, 47, 142}
+\definecolor{clr4}{RGB}{119, 172, 48}
+\definecolor{clr5}{RGB}{77, 190, 238}
+\definecolor{clr6}{RGB}{162, 20, 47}
+\definecolor{clr7}{RGB}{120, 120, 120}
+\begin{axis}[xmode=log,ymode=log,xlabel=Steglängd,ylabel=Avvikelse,width=\textwidth,height=0.6\textwidth,grid=both,minor grid style={draw=gray!33},major grid style={draw=gray},legend pos=south east,legend columns=2,legend style={column sep=1.5ex},]
+\addplot[line width=1pt,mark=*,color=clr0] table {
+0.05 1.6750755792762828
+0.025 1.6836670243033418
+0.0125 1.6438159414201832
+0.00625 1.4104628232068364
+0.003125 1.0016101885757394
+0.0015625 0.6110836745847075
+0.00078125 0.3395972996811829
+0.000390625 0.17929090939529457
+};
+\addlegendentry{\hspace{{-1.25ex}}Euler \(x\)}
+\addplot[line width=1pt,mark=*,color=clr1] table {
+0.05 2.5385976912679484
+0.025 2.5788057118256185
+0.0125 2.5327536079228596
+0.00625 2.177537353746312
+0.003125 1.5449812852953864
+0.0015625 0.9412778612469512
+0.00078125 0.522562409122171
+0.000390625 0.27572173340265005
+};
+\addlegendentry{\hspace{{-1.25ex}}Euler \(y\)}
+\addplot[line width=1pt,mark=*,color=clr2] table {
+0.05 0.009094604916475069
+0.025 0.0016945605347229442
+0.0125 0.000344297433158669
+0.00625 7.571383342752647e-05
+0.003125 1.760560197339167e-05
+0.0015625 4.23430494400634e-06
+0.00078125 1.0375805974405239e-06
+0.000390625 2.567638994754873e-07
+};
+\addlegendentry{\hspace{{-1.25ex}}Heun \(x\)}
+\addplot[line width=1pt,mark=*,color=clr3] table {
+0.05 0.03271401808365315
+0.025 0.0073081808942934146
+0.0125 0.001706531440970327
+0.00625 0.00041079809817334834
+0.003125 0.00010067098463961699
+0.0015625 2.491107442459395e-05
+0.00078125 6.195489655524966e-06
+0.000390625 1.5448252912442229e-06
+};
+\addlegendentry{\hspace{{-1.25ex}}Heun \(y\)}
+\end{axis}
+\end{tikzpicture}

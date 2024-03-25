@@ -1,0 +1,54 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[swedish, english]{babel}
+
+\input{config/config.sty}
+\input{config/bib.sty}
+\input{config/code.sty}
+
+\begin{document}
+\selectlanguage{swedish}
+
+\input{sections/title-page}
+
+\newpage
+% \newpage % Blank page
+
+\pagenumbering{roman}
+\input{sections/abstract}
+\newpage
+
+\renewcommand{\baselinestretch}{1.07}\normalsize
+\vfill % Put vfill on both sides of the page content to vertically center it
+\tableofcontents
+\renewcommand{\baselinestretch}{1}\normalsize
+\newpage
+\pagenumbering{arabic}
+
+\input{sections/inledning}
+
+\input{sections/teori}
+
+\input{sections/metod}
+
+\addtocontents{toc}{\protect\vfill\newpage} % Force new page in table of contents
+\input{sections/resultat}
+%\clearpage
+
+\input{sections/diskussion}
+
+\addcontentsline{toc}{section}{Källförteckning}
+\printbibliography[title=Källförteckning]
+
+\addcontentsline{toc}{section}{Lista över figurer}
+\listoffigures
+
+\addcontentsline{toc}{section}{Lista över tabeller}
+\listoftables
+
+\clearpage
+\appendix
+\pagenumbering{alph}
+\input{sections/appendix}
+
+\end{document}

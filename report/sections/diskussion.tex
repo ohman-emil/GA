@@ -1,0 +1,78 @@
+\section{Diskussion}
+\subsection{Resultatanalys}
+Det globala trunkeringsfelet i Eulers metod halveras ungefärligt vid små steglängder. Vid de större steglängderna som testades minskade avvikelsen mindre än förväntat. Detta ger diagrammet ett utseende som liknar en logaritmfunktion (se exempelvis figur \ref{fig:diagram_sys_2_errors} eller \ref{fig:diagram_sys_8_errors}, där avvikelsen för Eulers metod verkar konstant vid stora steglängden, och närmar sig långsamt ett linjärt samband). Detta går även att se i rådatan. Tabell \ref{tbl:sys_8_diff_euler} visar rådatan i Eulers metod för system 8. Det syns tydligt att trunkeringsfelet förändras lite vid större steglängder och närmar sig \(\frac{1}{2}\) vid mindre steglängder. Detta är någorlunda konsekvent med teorin. Definitionen av ordo-notation förutsätter tillräckligt små steglängder, vilket de flesta steglängder inte visar sig vara i denna undersökning. Vid vilken steglängd som trunkeringsfelet börjar följa ett linjär samband varierar likväl. I till exempel system 4 och system 5 (figur \ref{fig:diagram_sys_4_errors} respektive \ref{fig:diagram_sys_5_errors}) verkar det linjära sambandet uppnås tidigare.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lllll}
+        \tblh
+        
+        \multirow{2}{*}{Steglängd} & \multicolumn{2}{c}{Euler 1} & \multicolumn{2}{c}{Euler 2}\\
+        & Värde & Förändring & Värde & Förändring\\
+        
+        \hline
+        
+        0.05 & 5.076 & - & 4.401 & - \\
+        0.025 & 4.859 & 0.957 & 4.639 & 1.054 \\
+        0.0125 & 4.704 & 0.968 & 4.714 & 1.016 \\
+        0.00625 & 4.400 & 0.936 & 4.518 & 0.958 \\
+        0.003125 & 3.556 & 0.808 & 3.696 & 0.818 \\
+        0.0015625 & 2.397 & 0.674 & 2.509 & 0.679 \\
+        0.00078125 & 1.415 & 0.590 & 1.486 & 0.592 \\
+        0.000390625 & 0.772 & 0.546 & 0.812 & 0.547 \\
+
+        \tblh
+    \end{tabular}
+    \caption[Rådatan för Eulers metod i den inhomogena versionen av system 8.]{Rådatan för Eulers metod i den inhomogena versionen av system 8. Förändring räknades ut genom att dividera föregående värde med nuvarande, alltså andelen av det tidigare värdet.}
+    \label{tbl:sys_8_diff_euler}
+\end{table}
+
+Heuns metod följer emellertid den förutspådda minskningen av trukeringsfelet mycket bättre, även vid längre steglängder. Detta kan ses i diagrammen under \emph{Resultat}, där i stort sett varenda diagram visar en nästintill rak linje. Diagrammen är dubbellogaritmiska, vilket innebär att de har logaritmskalor på båda axlarna, och funktionen \(y=x^2\), som trunkeringsfelet i Henus metod enligt teorin kommer följa, ser därmed rak ut. Detta kan även verifieras genom att studera rådatan, där trunkeringsfelet minskar med ungefär en fjärdedel (se tabell \ref{tbl:sys_8_diff_heun}). Om figur \ref{fig:diagram_sys_8_errors} studeras framgår att avvikelsen beter sig oväntat då \(h=0.05\). I många andra system, som till exempel system 6 (figur \ref{fig:diagram_sys_6_errors}) är sambandet ännu starkare. Steglängderna som testades var förmodligen tillräckligt låga för att ordo-notationens förutspådda förändring ska vara tillräckligt nogrann i de flesta fall.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lllll}
+        \tblh
+        
+        \multirow{2}{*}{Steglängd} & \multicolumn{2}{c}{Heun 1} & \multicolumn{2}{c}{Heun 2}\\
+        & Värde & Förändring & Värde & Förändring\\
+        
+        \hline
+        
+        0.05 & 5,221 & - & 0.480 & - \\
+        0.025 & 0.791 & 0.152 & 0.384 & 0.801 \\
+        0.0125 & 0.192 & 0.243 & 0.099 & 0.258 \\
+        0.00625 & 0.051 & 0.264 & 0.022 & 0.221 \\
+        0.003125 & 0.013 & 0.261 & 0.005 & 0.224 \\
+        0.0015625 & 0.003 & 0.256 & 0.001 & 0.233 \\
+        0.00078125 & 0.001 & 0.253 & 0.000 & 0.240 \\
+        0.000390625 & 0.000 & 0.252 & 0.000 & 0.245 \\
+
+        \tblh
+    \end{tabular}
+    \caption[Rådatan för Heuns metod i den inhomogena versionen av system 8.]{Rådatan för Heuns metod i den inhomogena versionen av system 8. Förändring räknades ut genom att dividera föregående värde med nuvarande, alltså andelen av det tidigare värdet.}
+    \label{tbl:sys_8_diff_heun}
+\end{table}
+
+Från diagrammen går också att avläsa att de två funktionerna för Eulers respektive Heuns metod har liknande avvikelser och följer varandra. Detta är föga förvånande. De är, för det första, funktioner av samma form. Dessutom påverkar deras respektive värden varandra, och avvikelserna kommer därmed påverka varandra.
+
+Från diagram \ref{fig:diff_euler_heun} syns det att Heuns metod är flertalet tiopotenser bättre än Eulers metod i noggrannhet, trots att endast dubbelt antal beräkningar behöver genomföras. Skillnaden mellan Heuns metod och Eulers metod ökar därutöver när steglängden minskar. Värdena blir också mer utspridda vid kortare steglängder. Då \(h=0.05\) befinner sig alla system ungefärligt mellan \(10^0\) och \(10^{-2}\). Då \(h=0.000390625\) befinner sig alla värden mellan ungefär \(10^{-2}\) och \(10^{-6}\). Generaliserbara analyser är svårt att genomföra med tanke på att trunkeringsfelet i Eulers metod minskar mindre än vad teorin förutspår. Genom att göra samma undersökning med mindre steglängder hade möjligheten för grundligare analyser förmodligen förbättrats.
+
+\subsection{Metoddiskussion och vidare forskning}
+Detta arbete använder endast en metod för att kvantifiera avvikelsen, och gör dessutom begränsade försök. Dessa begränsningar behövde införas främst på grund av tidsaspekter. Att endast genomföra en metod, med så pass begränsade försök i så pass få system har givetvis en negativ påverkan på resultatens generaliserbarhet. Resultaten överensstämmer mestadels med teorin och tidigare forskning, vilket pekar på att dessa resultat sannolikt är någorlunda korrekta. Metoden som används och analysen som genomförs har däremot gjorts tidigare, och få nya insikter har getts.
+
+De felkällor som är aktuella relaterar för det mesta till den mänskliga faktorn. Buggar i koden är givetvis en signifikant felkälla, ty de kan påverka resultatet i hög grad. Fel kan uppstå i datorns kodexekvering, men de är sällan i av betydande grad. Dessutom är flyttalsfel en faktor att nämna. Eftersom beräkningen vid punkten \(t_n\) använder värdet vid punkten \(t_{n-1}\) kommer flyttalsfelen ``läggas på hög''. De flyttalsfel som introduceras i denna undersökning är förmodligen minimal och försumbar.
+
+%\subsection{Vidare forskning}
+Att undersöka flera lösningsmetoder än Eulers och Heuns metod hade sannolikt gett nya insikter på detta område. Till exempel kan Heuns metod utvecklas ytterligare till så kallade \emph{Runge-Kutta}-metoder av högre order. MatLab använder exempelvis metoden \emph{ODE45}, vilket är en Runge-Kutta-metod av femte ordningen. Generellt sätt bör dessa metoder vara mycket mer noggranna. Utöver detta bör beräkningskraften minska kraftigt, jämfört med den noggrannheten som erhålles.
+
+Dessutom finns algoritmer såsom \emph{LSODA}, som kan avgöra om en funktion är styv eller inte. Styvhet är i det allra simplaste termer ett mått på hur mycket en pertubation från en jämviktspunkt, alltså ett tillstånd som systemet kan befinna sig i, påverkar den analytiska lösningen. En styv differentialekvation kräver antingen anpassade algoritmer, såsom LSODA, eller en otänkbar liten steglängd i andra metoder \parencite{hindmarsh_algorithms_1995}.
+
+Ytterligare typer av differentialekvtioner kan även undersökas. Det kan emellertid resultera i mycket svårare analytiska lösningar. Det problemet kan kontras genom att skriva program som automatiskt löser dessa differentialekvationer analytiskt, vilket också ökar tidseffektiviteten och på så vis möjliggör mer data. Utöver detta kan mycket mer dataanalys genomföras. Detta arbete genererade hundratals megabyte data, och analysen som genomförs är väldigt grundläggande. Att genomföra grundligare analyser hade också bidragit. Varför olika parametrar genererar magnitud på avvikelsen hade exempelvis varit en intressant undersökning.
+
+Det finns dessutom modeller som är definierade utifrån partiella differentialekvationer, exempelvis modeller för trafikflöde (se \cite{laval_hamiltonjacobi_2013}), som varken Eulers eller Heuns metod kan lösa. Noggrannheten i sådana numeriska lösningsalgoritmer hade också kunnat undersökas.
+
+Generellt sätt är varken Eulers metod eller Heuns metod att föredra, eftersom dess noggrannhet är väldigt låg i förhållande till beräkningsintensiteten. Algoritmer såsom Runge-Kutta-metoder är mycket bättre anpassade till de behov som idag ställs på numeriska lösningsmetoder.
+
+\subsection{Slutsats}
+Vid tillräckligt små steglängder halveras det globala trunkeringsfelet för Eulers metod om steglängden halveras. I Heuns metod minskar trunkeringsfelet med en fjärdedel om steglängden halveras. Vid större steglängder minskade trunkeringsfelet mindre än förväntat vid en halvering av steglängden. Trunkeringsfelet i Heuns metod följer dess förutspådda värde vid länge steglängder i jämförelse med Eulers metod. Trunkeringsfelet är dessutom flertalet tiopotenser bättre i Heuns metod än Eulers metod. Detta är konsekvent med tidigare forskning och teorin. Det finns likväl algoritmer som bör föredras över både Eulers metod och Heuns metod.

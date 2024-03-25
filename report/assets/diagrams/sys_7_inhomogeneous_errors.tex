@@ -1,0 +1,57 @@
+% Automatically generated code. github.com/ohman-emil/GA
+\begin{tikzpicture}
+\definecolor{clr0}{RGB}{0, 114, 189}
+\definecolor{clr1}{RGB}{217, 83, 25}
+\definecolor{clr2}{RGB}{237, 177, 32}
+\definecolor{clr3}{RGB}{126, 47, 142}
+\definecolor{clr4}{RGB}{119, 172, 48}
+\definecolor{clr5}{RGB}{77, 190, 238}
+\definecolor{clr6}{RGB}{162, 20, 47}
+\definecolor{clr7}{RGB}{120, 120, 120}
+\begin{axis}[xmode=log,ymode=log,xlabel=Steglängd,ylabel=Avvikelse,width=\textwidth,height=0.6\textwidth,grid=both,minor grid style={draw=gray!33},major grid style={draw=gray},legend pos=south east,legend columns=2,legend style={column sep=1.5ex},]
+\addplot[line width=1pt,mark=*,color=clr0] table {
+0.05 25.804300337898795
+0.025 24.333169232850686
+0.0125 23.531918768179345
+0.00625 21.830853710300275
+0.003125 17.588102088448068
+0.0015625 12.058612390982148
+0.00078125 7.261419663011232
+0.000390625 4.018303417110644
+};
+\addlegendentry{\hspace{{-1.25ex}}Euler \(x\)}
+\addplot[line width=1pt,mark=*,color=clr1] table {
+0.05 16.28386341220378
+0.025 14.874209754748023
+0.0125 14.111954274031802
+0.00625 12.731743878643492
+0.003125 9.896588938603777
+0.0015625 6.652327161891193
+0.00078125 3.9804515031593724
+0.000390625 2.199662442524364
+};
+\addlegendentry{\hspace{{-1.25ex}}Euler \(y\)}
+\addplot[line width=1pt,mark=*,color=clr2] table {
+0.05 0.5050252886201605
+0.025 0.12882567047851268
+0.0125 0.03251991574758506
+0.00625 0.008168500422520708
+0.003125 0.0020468925743841737
+0.0015625 0.0005123159032649482
+0.00078125 0.00012815287183087776
+0.000390625 3.204744602669507e-05
+};
+\addlegendentry{\hspace{{-1.25ex}}Heun \(x\)}
+\addplot[line width=1pt,mark=*,color=clr3] table {
+0.05 0.48666405712926064
+0.025 0.12335885032795346
+0.0125 0.03103996831618616
+0.00625 0.007784138673940788
+0.003125 0.001948991931413957
+0.0015625 0.0004876136445872703
+0.00078125 0.00012194886888039491
+0.000390625 3.0492885613853105e-05
+};
+\addlegendentry{\hspace{{-1.25ex}}Heun \(y\)}
+\end{axis}
+\end{tikzpicture}

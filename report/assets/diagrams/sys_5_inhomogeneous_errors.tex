@@ -1,0 +1,57 @@
+% Automatically generated code. github.com/ohman-emil/GA
+\begin{tikzpicture}
+\definecolor{clr0}{RGB}{0, 114, 189}
+\definecolor{clr1}{RGB}{217, 83, 25}
+\definecolor{clr2}{RGB}{237, 177, 32}
+\definecolor{clr3}{RGB}{126, 47, 142}
+\definecolor{clr4}{RGB}{119, 172, 48}
+\definecolor{clr5}{RGB}{77, 190, 238}
+\definecolor{clr6}{RGB}{162, 20, 47}
+\definecolor{clr7}{RGB}{120, 120, 120}
+\begin{axis}[xmode=log,ymode=log,xlabel=Steglängd,ylabel=Avvikelse,width=\textwidth,height=0.6\textwidth,grid=both,minor grid style={draw=gray!33},major grid style={draw=gray},legend pos=south east,legend columns=2,legend style={column sep=1.5ex},]
+\addplot[line width=1pt,mark=*,color=clr0] table {
+0.05 0.3759645093403863
+0.025 0.21795006204599843
+0.0125 0.10927650667361566
+0.00625 0.051336804478818054
+0.003125 0.024078312802547464
+0.0015625 0.01151396660809012
+0.00078125 0.005607269901146017
+0.000390625 0.0027637344968782784
+};
+\addlegendentry{\hspace{{-1.25ex}}Euler \(x\)}
+\addplot[line width=1pt,mark=*,color=clr1] table {
+0.05 1.0089242190296794
+0.025 0.7813715702488935
+0.0125 0.5063088796738835
+0.00625 0.29124450510408884
+0.003125 0.15657857620377658
+0.0015625 0.08122736173108891
+0.00078125 0.04137434087472491
+0.000390625 0.02088068262533982
+};
+\addlegendentry{\hspace{{-1.25ex}}Euler \(y\)}
+\addplot[line width=1pt,mark=*,color=clr2] table {
+0.05 1.0004009073220983
+0.025 0.23466489776844268
+0.0125 0.05849946435374154
+0.00625 0.014703320803199471
+0.003125 0.003689058303593784
+0.0015625 0.0009240028854091697
+0.00078125 0.00023121857508101584
+0.000390625 5.7831751612891225e-05
+};
+\addlegendentry{\hspace{{-1.25ex}}Heun \(x\)}
+\addplot[line width=1pt,mark=*,color=clr3] table {
+0.05 0.38692620401567634
+0.025 0.05538740511546769
+0.0125 0.014803294989081284
+0.00625 0.004178171501861394
+0.003125 0.0011259137634098693
+0.0015625 0.0002929728227434314
+0.00078125 7.476125848238091e-05
+0.000390625 1.888509698311225e-05
+};
+\addlegendentry{\hspace{{-1.25ex}}Heun \(y\)}
+\end{axis}
+\end{tikzpicture}
