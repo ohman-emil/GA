@@ -1,0 +1,87 @@
+% Modified version of https://github.com/maminian/uncmathbeamer
+
+\RequirePackage{graphicx}
+\RequirePackage{tabularx}
+\RequirePackage{calc}
+\RequirePackage{xcolor}
+
+\mode<presentation>
+
+\setbeamercolor*{structure}{bg=teal}
+
+\setbeamercolor*{palette primary}{fg=structure.fg,bg=structure.bg}
+\setbeamercolor*{palette secondary}{fg=black,bg=structure.bg!40}
+\setbeamercolor*{palette tertiary}{fg=black,bg=structure.bg!20}
+\setbeamercolor*{palette quaternary}{fg=black,bg=structure.bg!5}
+
+\setbeamertemplate{itemize item}[circle]
+
+% Use traditional latex math font in beamer.
+\usefonttheme[onlymath]{serif}
+
+
+% Title page
+\defbeamertemplate*{title page}{}
+{
+    \centering
+    \begin{beamercolorbox}[wd=\textwidth, sep=15pt, center]{palette secondary}
+        \usebeamerfont{title}\inserttitle\par
+    \end{beamercolorbox}
+    \vspace{0.3em}
+    \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+
+    \vspace{0.5em}
+
+    \textcolor{palette secondary.bg}{\rule{0.8\textwidth}{0.06em}}\\
+
+    \vspace{1em}
+
+    \usebeamerfont{author}\insertauthor\par
+
+    \vspace{1em}
+
+    \usebeamerfont{institute}\insertinstitute\par
+    \usebeamerfont{date}\insertdate\par
+}
+
+% Frame title.
+\defbeamertemplate*{frametitle}{}
+{%
+    \ifx\insertframetitle\@empty % If title is empty, do nothing
+          %
+    \else
+        \vspace{-1pt} % Remove white line at top of page
+        \begin{beamercolorbox}[wd=\paperwidth, left, sep=10pt]{palette secondary}
+            \usebeamerfont{frametitle}\insertframetitle
+        \end{beamercolorbox}
+    \fi
+}
+
+% Clean up the footer. Only have name and presentation title.
+\setbeamertemplate{footline}
+{%
+  \hbox{%
+      \begin{beamercolorbox}[wd=0.5\paperwidth,ht=2.5ex,dp=1.25ex,left]{palette secondary}%
+    	~~\insertshortauthor%
+      \end{beamercolorbox}%
+    %
+      \begin{beamercolorbox}[wd=0.5\paperwidth,ht=2.5ex,dp=1.25ex,right]{palette tertiary}%
+    	\insertshorttitle~~
+      \end{beamercolorbox}%
+  }
+}
+
+
+% Kill off other template parts just in case.
+\setbeamertemplate{sidebar canvas left}{}
+\setbeamertemplate{sidebar left}{}
+
+\setbeamertemplate{sidebar canvas right}{}
+\setbeamertemplate{sidebar right}{}
+
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+% Remove beamer navigation buttons.
+\beamertemplatenavigationsymbolsempty
+
+\mode<all>

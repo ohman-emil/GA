@@ -1,0 +1,392 @@
+% Aviod blur in Acrobat Reader: Open in Preview and export as PDF/A.
+
+\documentclass[12pt, aspectratio=169, xcolor={dvipsnames,svgnames}]{beamer}
+\usepackage[utf8]{inputenc}
+
+\usepackage{config}
+
+\title{Numeriska lösningsmetoders noggrannhet i kopplade differentialekvationer}
+\subtitle{\normalsize En jämförelse mellan Eulers och Heuns metod}
+\author{Emil Öhman}
+\date{2023-04-24}
+\institute{Täby Enskilda Gymnasium}
+%\titlegraphic{\hfill\includegraphics[height=1.5cm]{teg_logo.png}}
+
+\begin{document}
+
+\begin{frame}
+    \maketitle
+    %\begin{tikzpicture}[overlay, remember picture]
+    % \node[anchor=south east,yshift=30pt,xshift=-25pt] at (current page.south east) {\includegraphics[width=15mm]{teg_logo.png}};
+    %\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Recap: Derivata}
+    \[\begin{split}
+    \onslide<1->{y&=e^{\frac{1}{2}x}\\[1em]}
+    \onslide<2->{y'&=\frac{1}{2}e^{\frac{1}{2}x}\\[1em]}
+    \onslide<3->{\alert<4->{y'}&\alert<4->{=\frac{1}{2}y}} %aboxed
+    %\only<4>{y'(1)'&=\frac{1}{2}e^\frac{1}{2}\approx0.82\\[1em]}
+    %\onslide<6->{y'&=\frac{1}{2}y}
+    \end{split}\]
+    \onslide<4->{\bfseries\centering Det här är en differentialekvation!}
+\end{frame}
+
+\begin{frame}{Vad är en differentialekvation?}
+    En differentialekvation är ett samband mellan en funktion och dess derivator.\\[1.5em]
+    \pause
+    \begin{exampleblock}{Exempel}
+    \alert{\(y'=ky\)} är en differentialekvation med lösningen \alert{\(y=e^{kx}\)}, där \(k\) är en konstant.
+    \end{exampleblock}
+\end{frame}
+
+
+\begin{frame}{Recap: Ekvationssystem}
+    \[
+    \begin{cases}
+        3x+4y=11\\
+        x-3y=-5
+    \end{cases}
+    \Longrightarrow
+    \begin{cases}
+        x=\alt<2->{1}{\mathrm{?}}\\
+        y=\alt<2->{2}{\mathrm{?}}
+    \end{cases}
+    \]
+
+    \onslide<3->{
+    \begin{center}
+        {\bfseries Varför är detta relevant?}
+    \end{center}}
+\end{frame}
+
+\begin{frame}{Kopplade differentialekvationer}
+    \[
+    \begin{cases}
+        y_1'=3y_1+4y_2\\
+        y_2'=y_1-3y_2
+    \end{cases}
+    \]
+    
+    \alt<2>%
+    {\footnotesize \[\begin{cases}
+        \begin{aligned}
+            y_1=&\frac{1}{26}c_1e^{-\sqrt{13}t}\left((13+3\sqrt{13})e^{2\sqrt{13}t}+13+-3\sqrt{13}\right)\\
+            +&\frac{2}{\sqrt{13}}\left(c_2e^{-\sqrt{13}t}(e^{2\sqrt{13}t}-1)\right)
+        \end{aligned}\\
+        \\[3pt]
+        \begin{aligned}
+            y_2=&\frac{1}{\sqrt{13}}\left(c_1e^{-\sqrt{13}t}(e^{2\sqrt{13}t}-1)\right)\\
+            -&\frac{1}{26}c_2e^{-\sqrt{13}t}\left((3\sqrt{13}-13)e^{2\sqrt{13}t}-13-3\sqrt{3}\right)
+        \end{aligned}
+    \end{cases}\]}
+    {\vspace{1em}\textbf{Mål: }Att finna två funktioner, \(y_1\) och \(y_2\), som uppfyller ekvationerna ovan.}
+\end{frame}
+
+\begin{frame}{Numeriska lösningsmetoder}
+    \alt<3>{
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[scale=0.85]
+            \def\a{1.7}
+            \def\b{5.7}
+            \def\c{3.7}
+            \def\L{0.5} % width of interval
+            
+            \pgfmathsetmacro{\Va}{2*sin(\a r+1)+4} \pgfmathresult
+            \pgfmathsetmacro{\Vb}{2*sin(\b r+1)+4} \pgfmathresult
+            \pgfmathsetmacro{\Vc}{2*sin(\c r+1)+4} \pgfmathresult
+            
+            \draw[->,thick] (-0.5,0) -- (7,0) coordinate (x axis) node[below] {\(x\)};
+            \draw[->,thick] (0,-0.5) -- (0,7) coordinate (y axis) node[left] {\(y\)};
+            
+            \foreach \f in {1.7,2.2,...,6.2} {\pgfmathparse{2*sin(\f r+1)+4} \pgfmathresult
+            \draw[fill=mLightBrown!20, draw=mLightBrown!80] (\f-\L/2,\pgfmathresult |- x axis) -- (\f-\L/2,\pgfmathresult) -- (\f+\L/2,\pgfmathresult) -- (\f+\L/2,\pgfmathresult |- x axis) -- cycle;}
+            \draw[mLightBrown,very thick,smooth,samples=100,domain=1.45:6.2] plot(\x,{2*sin(\x r+1)+4});
+        \end{tikzpicture}
+    \end{figure}
+    }{
+    Om vi inte kan lösa en differentialekvation måste \alert{numeriska lösningsmetoder} användas.
+    \pause\\[1em]
+    Numeriska lösningsmetoder är algoritmer som approximerar lösningen.
+    }
+\end{frame}
+
+\begin{frame}{Begrepp inom numeriska lösningsmetoder}
+    \textbf{Steglängd}\\ Betecknas ofta \(h\). Representerar den längd som ``hoppas fram'' vid varje beräkning.\\[1em]
+    \pause
+    \textbf{Trunkeringsfel}\\ Betecknas ofta \(e_n\). Skillnaden mellan den exakta lösningen och den numeriska lösningen vid en punkt \(n\). Beräknas genom \(e_n=|y(t_n)-y_n|\).
+\end{frame}
+
+%\begin{frame}{Begrepp inom numeriska lösningsmetoder}
+%    \begin{block}{Steglängd}
+%        Betecknas ofta \(h\). Representerar den längd som ``hoppas fram'' vid varje beräkning.
+%    \end{block}
+%    \pause
+%    \begin{block}{Trunkeringsfel}
+%        Betecknas ofta \(e_n\). Skillnaden mellan den exakta lösningen och den numeriska lösningen vid punkten \(n\). Beräknas genom \(e_n=|y(t_n)-y_n|\).
+%    \end{block}
+%\end{frame}
+
+\begin{frame}{Undersökningen}
+    \begin{itemize}[<+- | alert@+>]
+        \setbeamercolor{alerted text}{fg=black}
+        \setbeamerfont{alerted text}{series=\bfseries}
+
+        \item Jämförelse mellan två olika lösningsmetoder: Eulers- och Heuns metod
+        \item 8 system
+        \item Python-kod för att köra simuleringar
+        \item 8 olika steglängder
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Enligt teoretiska beräkningar}
+    Trunkeringsfelet i \textbf{Eulers metod} bör minska med \alert{\Large\(\frac{1}{2}\)} när steglängden halveras.\\[1.5em]
+    Trunkeringsfelet i \textbf{Heuns metod} bör minska med \alert{\Large\(\frac{1}{4}\)} när steglängden halveras.
+\end{frame}
+
+\begin{frame}{Resultat}
+    \begin{figure}
+        \centering
+        \input{assets/results-diagram}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Slutsatser}
+    \begin{itemize}[<+- | alert@+>]
+        \setbeamercolor{alerted text}{fg=black}
+        \setbeamerfont{alerted text}{series=\bfseries}
+        
+        \item Vid stora steglängder \emph{kan} Eulers metod vara med noggrann.
+        \item Heuns metod är flertalet tiopotenser bättre vid små steglängder.
+        \item Resultaten följer, i allmänhet, de teorietiska beräkningarna vid tillräckligt små steglängder.
+  \end{itemize}
+  \onslide<4>{}
+\end{frame}
+
+\begin{frame}{Några tips}
+    \begin{enumerate}[<+- | alert@+>]
+        \setbeamercolor{alerted text}{fg=black}
+        \setbeamerfont{alerted text}{series=\bfseries}
+    
+        \item Börja i tid! Desto mer du gör på hösten, ju mindre att göra på våren.
+        \item Var strukturerad och låt alltid syftet styra.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[standout]
+    Tack!\\[0.3em]
+    \textnormal{Jag finns kvar; ställ frågor!}
+\end{frame}
+
+\begin{frame}{Mina system}
+    \begin{columns}
+        \column{0.33\textwidth}
+        \[
+        \begin{cases}
+            y_1'=5.4y_1-3.4y_2\\
+            y_2'=9.2y_1-5.4y_2
+        \end{cases}
+        \]
+        \[
+        \begin{cases}
+            y_1'=-3.6y_1-2y_2\\
+            y_2'=7.1y_1+3.6y_2
+        \end{cases}
+        \]
+
+        \column{0.33\textwidth}
+        \[
+        \begin{cases}
+            y_1'=7.8y_1-9.6y_2\\
+            y_2'=7.3y_1-7.8y_2
+        \end{cases}
+        \]
+        \[
+        \begin{cases}
+            y_1'=-2y_1+3.1y_2\\
+            y_2'=-2.6y_1+2y_2
+        \end{cases}
+        \]
+
+        \column{0.33\textwidth}
+        \[
+        \begin{cases}
+            y_1'=2.3y_1+5y_2-2.5\\
+            y_2'=5.8y_1-2.3y_2+6.5
+        \end{cases}
+        \]
+        \[
+        \begin{cases}
+            y_1'=7.2y_1-9.8y_2-1.4\\
+            y_2'=5.5y_1-7.2y_2+4.1
+        \end{cases}
+        \]
+    \end{columns}
+
+    \begin{columns}
+        \column{0.5\textwidth}
+        \[
+        \begin{cases}
+            y_1'=-7.6y_1-8.4y_2-5.8\\
+            y_2'=7.0y_1+7.6y_2-2.3
+        \end{cases}
+        \]
+
+        \column{0.5\textwidth}
+        \[
+        \begin{cases}
+            y_1'=6.9y_1-9.5y_2-8.5\\
+            y_2'=8.2y_1-6.9y_2+6
+        \end{cases}
+        \]
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Frågeställningar}
+    \begin{enumerate}
+        \item Hur påverkar steglängden noggrannheten i Eulers respektive Heuns metod i periodiska kopplade differentialekvationer?
+        \item Hur skiljer sig Eulers och Heuns metod i noggrannhet för att lösa periodiska kopplade differentialekvationer?
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Abstract}
+    \begin{footnotesize}
+    This work aims to analyse the differences in accuracy between Euler's and Heun's method for solving periodic coupled differential equations. The aforementioned methods are coded in Python, and analytical solutions are obtained using eigenvectors and eigenvalues. Eight periodic systems are examined, of which four are inhomogeneous. It is found that a halving of the step length results in an approximate halving of the total error in Euler's method, if the step length is small enough. In Heun's method, it is found that a halving in step length reduces the total error to about a quarter. This is consistent with previous reseach. Additionally, it is determined that Heun's method is multiple orders of magnitude more accurate compared to Euler's method, if the step length is small enough. Overall, the accuacy in Heun's method is better compared to Euler's method. However, more advanced algorithms are in general more suited towards the computational needs of today.
+    \end{footnotesize}
+\end{frame}
+
+%\begin{frame}{Periodicitet}
+%    \begin{figure}
+%        \centering
+%        \begin{tikzpicture}
+%            \begin{axis}[
+%                mlineplot,
+%                axis x line=middle,
+%                axis y line=middle,
+%                height=0.4\linewidth,
+%                width=0.9\linewidth,
+%                xmin=0,
+%                xmax=1080,
+%                ymin=-1.5,
+%                ymax=1.5,
+%                xlabel=\(x\),
+%                ylabel=\(y\),
+%                xticklabel=\(\pgfmathprintnumber{\tick}\degree\),
+%                samples=50
+%            ]
+%            
+%            \addplot plot [very thick, mark=none, domain=0:1080, smooth]{sin(x)};
+%            
+%            \end{axis}
+%        \end{tikzpicture}
+%    \end{figure}
+%\end{frame}
+
+%\begin{frame}{Först: Begynnelsevillkor}
+%    \(y'=\frac{1}{2}y\) har lösningen \(y=\alert<2>{C}e^{\frac{1}{2}x}\).
+%    \onslide<3->{\\[0.5em]För att bestämma \(C\) måste vi ha ett så kallat \alert{begynnelsevillkor}.}
+%    \onslide<4->{
+%    \begin{exampleblock}{Exempel}
+%        Begynnelsevillkoret \(y(0)=2\) innebär att \(y(0)=Ce^{\frac{1}{2}\cdot0}=C=2\). Lösningen är alltså \(y=2e^{\frac{1}{2}x}\).
+%    \end{exampleblock}
+%    }
+%\end{frame}
+
+%\begin{frame}{Eulers metod}
+%    \begin{exampleblock}{Exempeluppgift}
+%        Lös differentialekvationen \[y'=\frac{3}{2}y,\quad y(0)=\frac{1}{2}\] med Eulers metod.
+%    \end{exampleblock}
+%\end{frame}
+
+%\begin{frame}{Eulers metod - Exempel}
+%    \begin{columns}
+%        \column{0.6\textwidth}
+%        \begin{figure}
+%            \centering
+%            \begin{tikzpicture}
+%                \begin{axis}[
+%                    mlineplot,
+%                    axis x line=middle,
+%                    axis y line=middle,
+%                    height=0.9\linewidth,
+%                    width=0.9\linewidth,
+%                    xmin=0,
+%                    xmax=3,
+%                    ymin=0,
+%                    ymax=10,
+%                    xlabel=\(x\),
+%                    ylabel=\(y\)
+%                ]
+%
+%                % solution
+%                \addplot plot [very thick, mark=none, domain=0:3, visible on=<21->]{0.5*exp(1.5*x)};
+%                
+%                \filldraw [visible on=<2->] (0, 5) circle (2pt); % initial value dot
+%
+%                % y'(0) tangent
+%                \addplot [thick, visible on=<4-8>] coordinates {(0, 0.5) (3, 2.75)};
+%                \addplot [thick, visible on=<9->] coordinates {(0, 0.5) (0.5, 0.875)};
+%
+%                % y'(0) tangent dot at x=0.5
+%                \filldraw [visible on=<5->] (50, 8.75) circle (2pt)%
+%                    node [anchor=north west, visible on=<5->] {\footnotesize\((0.5, 0.875)\)}; %8
+%
+%                % y'(0.5) tangent
+%                \addplot [thick, visible on=<8-12>] coordinates {(0.5, 0.875) (3, 4.15625)};
+%                \addplot [thick, visible on=<13->] coordinates {(0.5, 0.875) (1, 1.53125)};
+%
+%                % y'(0.5) tangent dot at x=1
+%                \filldraw [visible on=<9->] (100, 15.3125) circle (2pt)%
+%                    node [anchor=north west, visible on=<9->] {\footnotesize\((1, 1.53)\)}; %12
+%
+%                 % y'(1) tangent
+%                \addplot [thick, visible on=<12-14>] coordinates {(1, 1.53125) (3, 6.125)};
+%                \addplot [thick, visible on=<15->] coordinates {(1, 1.53125) (1.5, 2.679687500)};
+%
+%                % y'(1) tangent dot at x=1.5
+%                \filldraw [visible on=<13->] (150, 26.79687500) circle (2pt)%
+%                    node [anchor=north west, visible on=<13->] {\footnotesize\((1.5, 2.68)\)}; %14
+%
+%                % y'(1.5) tangent
+%                \addplot [thick, visible on=<14-16>] coordinates {(1.5, 2.679687500) (3, 8.708984375)};
+%                \addplot [thick, visible on=<17->] coordinates {(1.5, 2.679687500) (2, 4.689453125)};
+%
+%                % y'(1.5) tangent dot at x=2
+%                \filldraw [visible on=<15->] (200, 46.89453125) circle (2pt)%
+%                    node [anchor=north west, visible on=<15->] {\footnotesize\((2, 4.69)\)};
+%
+%                % y'(2) tangent
+%                \addplot [thick, visible on=<16-18>] coordinates {(2, 4.689453125) (3, 11.723632813)};
+%                \addplot [thick, visible on=<19->] coordinates {(2, 4.689453125) (2.5, 8.206542969)};
+%
+%                % y'(2) tangent dot at x=2.5
+%                \filldraw [visible on=<17->] (250, 82.06542969) circle (2pt)%
+%                    node [anchor=south east, visible on=<17->] {\footnotesize\((2.5, 8.21)\)};
+%
+%                % y'(2.5) tangent
+%                \addplot [thick, visible on=<18->] coordinates {(2.5, 8.206542969) (3, 14.361450195)};
+%                
+%                \end{axis}
+%            \end{tikzpicture}
+%        \end{figure}
+%
+%        \column{0.4\textwidth}
+%        \alt<20->{
+%            \alt<22->{\[y_{n+1}=y_{n}+hy'(y_n)\]}{Andningspaus...}
+%        }{
+%            \[\boxed{y'=\frac{3}{2}y,\quad y(0)=\frac{1}{2}}\]\\[-1em]
+%            \onslide<3->{\[y'(0)=\frac{3}{2}y(0)=\frac{3}{2}\cdot\frac{1}{2}=\frac{3}{4}\]}
+%            \[
+%                \onslide<6->{y'(0.5)=\frac{3}{2}y(0.5)=
+%                \onslide<7->{\frac{3}{2}\cdot\frac{7}{8}=\frac{21}{16}}
+%            }\]
+%            \[
+%                \onslide<10->{y'(1)=\frac{21}{16}y(1)=
+%                \onslide<11->{\frac{3}{2}\cdot\frac{49}{32}=\frac{147}{64}}
+%            }\]
+%        }
+%    \end{columns}
+%\end{frame}
+
+\end{document}

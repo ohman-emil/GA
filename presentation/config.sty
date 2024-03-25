@@ -1,0 +1,29 @@
+% Metropolis config
+\usetheme{metropolis}
+\usefonttheme[onlymath]{serif}
+\metroset{block=fill, numbering=none}
+
+% Beamer color config
+%\usepackage{metropolisTEG}
+\setbeamercolor{block title}{bg=frametitle.bg, fg=frametitle.fg}
+\setbeamercolor{block body}{bg=frametitle.bg!20, fg=normal text.fg}
+
+\setbeamercolor{block title example}{bg=example text.fg, fg=normal text.fg}
+\setbeamercolor{block body example}{bg=example text.fg!30, fg=normal text.fg}
+
+\setbeamercolor{block title alerted}{bg=alerted text.fg, fg=normal text.fg}
+\setbeamercolor{block body alerted}{bg=alerted text.fg!30, fg=normal text.fg}
+
+% Tikz
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\tikzset{ % Enable "visible on". Stolen from https://tex.stackexchange.com/a/55849
+    invisible/.style={opacity=0},
+    visible on/.style={alt={#1{}{invisible}}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+    },
+  }
+
+% Packages
+\usepackage{gensymb} % For degree symbol
